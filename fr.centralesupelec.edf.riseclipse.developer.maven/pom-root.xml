@@ -6,12 +6,18 @@
   <!--
     This is the root POM for RiseClipse.
     All common properties should be defiened here.
+    
+    To build command line tools, it must be installed with maven using the following command:
+    mvn install:install-file -Dfile=pom-root.xml \
+        -DgroupId=fr.centralesupelec.edf.riseclipse \
+        -DartifactId=fr.centralesupelec.edf.riseclipse.developer.maven-root \
+        -Dversion=1.0 -Dpackaging=pom
   -->
 
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-  <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
+  <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-root</artifactId>
   <version>1.0</version>
   <packaging>pom</packaging>
   
@@ -37,15 +43,21 @@
         <extensions>true</extensions>
       </plugin>
 
-      <!--
-        Just to avoid:
-        [WARNING] No explicit target runtime environment configuration. Build is platform dependent.
-      -->
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho-version}</version>
         <configuration>
+          <!--
+            This was in the students POM files, not sure why and when it is needed,
+            so commented out for the moment
+            <pomDependencies>consider</pomDependencies>
+          -->
+
+          <!--
+            Just to avoid:
+            [WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+          -->
           <environments>
             <environment>
               <os>linux</os>
@@ -76,18 +88,6 @@
         </configuration>
       </plugin>
 
-      <!--
-        This was in the students POM files, not sure why and when it is needed,
-        so commented out for the moment
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-          <pomDependencies>consider</pomDependencies>
-        </configuration>
-      </plugin>
-      -->
     </plugins>
   </build>
 
