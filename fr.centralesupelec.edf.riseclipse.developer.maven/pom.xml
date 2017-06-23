@@ -27,6 +27,7 @@
     <module>../../RiseClipseMetamodel_iec61970cim17</module>
     <module>../../RiseClipseMetamodel_iec61970cim17_iec61968cim13</module>
     <module>../../RiseClipseOCLValidator</module>
+    <module>../../RiseClipseOCLValidator_SCL2003</module>
   </modules>
 
 </project>
