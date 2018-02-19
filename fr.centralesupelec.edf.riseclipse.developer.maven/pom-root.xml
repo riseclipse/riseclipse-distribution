@@ -30,8 +30,8 @@
 
   <repositories>
     <repository>
-      <id>eclipse-neon</id>
-      <url>http://download.eclipse.org/releases/neon</url>
+      <id>eclipse-oxygen</id>
+      <url>http://download.eclipse.org/releases/oxygen</url>
       <layout>p2</layout>
     </repository>
   </repositories>
