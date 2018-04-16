@@ -11,7 +11,7 @@
     mvn install:install-file -Dfile=pom-root.xml \
         -DgroupId=fr.centralesupelec.edf.riseclipse \
         -DartifactId=fr.centralesupelec.edf.riseclipse.developer.maven-root \
-        -Dversion=1.0 -Dpackaging=pom
+        -Dversion=1.0.0 -Dpackaging=pom
   -->
 
   <modelVersion>4.0.0</modelVersion>
@@ -22,10 +22,15 @@
   <packaging>pom</packaging>
   
   <properties>
-    <tycho-version>1.0.0</tycho-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    
+    <tycho-version>1.1.0</tycho-version>
+    
+    <unleash-maven-version>2.7.4</unleash-maven-version>
+    <unleash-scm-provider-git-version>2.1.0</unleash-scm-provider-git-version>
+    
     <eclipse-equinox-version>1.3.400</eclipse-equinox-version>
     <!--
       Current (2018-04-06, Oxygen) EMF version is 2.13.0
@@ -38,6 +43,7 @@
     -->
     <eclipse-emf-version>2.12.0</eclipse-emf-version>
     <eclipse-ocl-version>1.3.0</eclipse-ocl-version>
+    
     <log4j-version>1.2.17</log4j-version>
   </properties>
 
@@ -49,58 +55,143 @@
     </repository>
   </repositories>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>nexus-snapshots</id>
+      <url>http://riseclipse-ci.supelec.fr:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>nexus-releases</id>
+      <url>http://riseclipse-ci.supelec.fr:8081/repository/maven-releases/</url>
+    </repository>
+  </distributionManagement>
+
   <build>
+    <pluginManagement>
+      <plugins>
+      
+        <plugin>
+          <!-- It is prefered over the standard release maven plugin -->
+          <groupId>com.itemis.maven.plugins</groupId>
+          <artifactId>unleash-maven-plugin</artifactId>
+          <version>${unleash-maven-version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.itemis.maven.plugins</groupId>
+              <artifactId>unleash-scm-provider-git</artifactId>
+              <version>${unleash-scm-provider-git-version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
+        <!-- Tycho is used to build eclipse plugins and update-site -->
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-maven-plugin</artifactId>
+          <version>${tycho-version}</version>
+          <extensions>true</extensions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>target-platform-configuration</artifactId>
+          <version>${tycho-version}</version>
+          <configuration>
+            <!--
+              This was in the students POM files, not sure why and when it is needed,
+              so commented out for the moment
+              <pomDependencies>consider</pomDependencies>
+            -->
+  
+            <!--
+              Just to avoid:
+              [WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+            -->
+            <environments>
+              <environment>
+                <os>linux</os>
+                <ws>gtk</ws>
+                <arch>x86</arch>
+              </environment>
+              <environment>
+                <os>linux</os>
+                <ws>gtk</ws>
+                <arch>x86_64</arch>
+              </environment>
+              <environment>
+                <os>win32</os>
+                <ws>win32</ws>
+                <arch>x86</arch>
+              </environment>
+              <environment>
+                <os>win32</os>
+                <ws>win32</ws>
+                <arch>x86_64</arch>
+              </environment>
+              <environment>
+                <os>macosx</os>
+                <ws>cocoa</ws>
+                <arch>x86_64</arch>
+              </environment>
+            </environments>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-packaging-plugin</artifactId>
+          <version>${tycho-version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.eclipse.tycho.extras</groupId>
+                <artifactId>tycho-buildtimestamp-jgit</artifactId>
+                <version>${tycho-version}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <timestampProvider>jgit</timestampProvider>
+            <jgit.ignore>pom.xml</jgit.ignore>
+            <jgit.dirtyWorkingTree>ignore</jgit.dirtyWorkingTree>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-source-plugin</artifactId>
+          <version>${tycho-version}</version>
+          <executions>
+            <execution>
+              <id>plugin-source</id>
+              <goals>
+                <goal>plugin-source</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+    
     <plugins>
+
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <extensions>true</extensions>
       </plugin>
 
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-          <!--
-            This was in the students POM files, not sure why and when it is needed,
-            so commented out for the moment
-            <pomDependencies>consider</pomDependencies>
-          -->
+      </plugin>
 
-          <!--
-            Just to avoid:
-            [WARNING] No explicit target runtime environment configuration. Build is platform dependent.
-          -->
-          <environments>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
-              <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>macosx</os>
-              <ws>cocoa</ws>
-              <arch>x86_64</arch>
-            </environment>
-          </environments>
-        </configuration>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-source-plugin</artifactId>
       </plugin>
 
     </plugins>

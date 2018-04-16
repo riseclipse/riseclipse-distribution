@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-  <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-all</artifactId>
+  <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   
@@ -17,17 +17,10 @@
     <relativePath>./pom-root.xml</relativePath>
   </parent>
 
-  <modules>
-    <module>../../RiseClipseMain</module>
-    <module>../../RiseClipseEditor</module>
-    <module>../../RiseClipseMetamodel_SCL2003</module>
-    <module>../../RiseClipseMetamodel_Cim</module>
-    <module>../../RiseClipseMetamodel_Cim16</module>
-    <module>../../RiseClipseMetamodel_Cim17</module>
-    <module>../../RiseClipseMetamodel_iec61970cim17</module>
-    <module>../../RiseClipseMetamodel_iec61970cim17_iec61968cim13</module>
-    <module>../../RiseClipseOCLValidator</module>
-    <module>../../RiseClipseOCLValidator_SCL2003</module>
-  </modules>
-
+  <scm>
+    <connection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDeveloper.git</connection>
+    <developerConnection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDeveloper.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+ 
 </project>
