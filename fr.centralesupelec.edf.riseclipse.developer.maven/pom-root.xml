@@ -28,7 +28,7 @@
     
     <tycho-version>1.1.0</tycho-version>
     
-    <unleash-maven-version>2.7.4</unleash-maven-version>
+    <unleash-maven-version>2.8.0</unleash-maven-version>
     <unleash-scm-provider-git-version>2.1.0</unleash-scm-provider-git-version>
     
     <eclipse-equinox-version>1.3.400</eclipse-equinox-version>
@@ -47,6 +47,24 @@
     <log4j-version>1.2.17</log4j-version>
   </properties>
 
+  <profiles>
+    <profile>
+      <id>use-nexus-on-riceclipse-ci</id>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>nexus</id>
+          <name>Nexus Snapshots</name>
+          <url>http://riseclipse-ci.supelec.fr:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+          <id>nexus</id>
+          <name>Nexus Releases</name>
+          <url>http://riseclipse-ci.supelec.fr:8081/repository/maven-releases/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+  </profiles>
+  
   <repositories>
     <repository>
       <id>eclipse-oxygen</id>
@@ -54,17 +72,6 @@
       <layout>p2</layout>
     </repository>
   </repositories>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>nexus-snapshots</id>
-      <url>http://riseclipse-ci.supelec.fr:8081/repository/maven-snapshots/</url>
-    </snapshotRepository>
-    <repository>
-      <id>nexus-releases</id>
-      <url>http://riseclipse-ci.supelec.fr:8081/repository/maven-releases/</url>
-    </repository>
-  </distributionManagement>
 
   <build>
     <pluginManagement>
@@ -75,6 +82,9 @@
           <groupId>com.itemis.maven.plugins</groupId>
           <artifactId>unleash-maven-plugin</artifactId>
           <version>${unleash-maven-version}</version>
+          <configuration>
+            <tagNamePattern>v@{project.version}</tagNamePattern>
+          </configuration>
           <dependencies>
             <dependency>
               <groupId>com.itemis.maven.plugins</groupId>
