@@ -84,6 +84,8 @@
           <version>${unleash-maven-version}</version>
           <configuration>
             <tagNamePattern>v@{project.version}</tagNamePattern>
+            <commitBeforeTagging>true</commitBeforeTagging>
+            <allowLocalReleaseArtifacts>false</allowLocalReleaseArtifacts>
           </configuration>
           <dependencies>
             <dependency>
