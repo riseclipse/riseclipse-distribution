@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>fr.centralesupelec.edf.riseclipse</groupId>
+  <artifactId>fr.centralesupelec.edf.riseclipse.update-site</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>eclipse-repository</packaging>
+  
+  <parent>
+    <groupId>fr.centralesupelec.edf.riseclipse</groupId>
+    <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-root</artifactId>
+    <version>1.0.1</version>
+    <relativePath>../fr.centralesupelec.edf.riseclipse.developer.maven/pom-root.xml</relativePath>
+  </parent>
+
+  <!-- It should be specified in pom-root, but then Maven fails to find dependencies ??
+  -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <pomDependencies>consider</pomDependencies>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <!-- RiseClipse needed plugins
+       See https://wiki.eclipse.org/Tycho/Target_Platform "POM dependencies consider"
+       However, only editor is required, not main !
+   -->
+  <dependencies>
+    <dependency>
+      <groupId>fr.centralesupelec.edf.riseclipse</groupId>
+      <artifactId>fr.centralesupelec.edf.riseclipse.editor</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+
+</project>
