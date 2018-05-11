@@ -5,20 +5,22 @@
 
   <!--
     This is the root POM for RiseClipse.
-    All common properties should be defiened here.
+    All common properties should be defined here.
     
-    To build command line tools, it must be installed with maven using the following command:
+    To build/install standalone tools, it must be installed with maven using the following command:
     mvn install:install-file -Dfile=pom-root.xml \
         -DgroupId=fr.centralesupelec.edf.riseclipse \
         -DartifactId=fr.centralesupelec.edf.riseclipse.developer.maven-root \
         -Dversion=1.0.0 -Dpackaging=pom
+    
+    To build/deploy standalone tools, it must be deployed using the appropriate command.
   -->
 
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-root</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
   <packaging>pom</packaging>
   
   <properties>
