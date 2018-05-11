@@ -41,7 +41,7 @@
    </url>
 
    <includes
-         id="fr.centralesupelec.edf.riseclipse.feature.main"
+         id="fr.centralesupelec.edf.riseclipse.feature.editor"
          version="0.0.0"
          name="RiseClipse Editor"/>
 
