@@ -9,7 +9,7 @@
    <feature url="features/fr.centralesupelec.edf.riseclipse.feature.iec61850.scl_1.0.0.qualifier.jar" id="fr.centralesupelec.edf.riseclipse.feature.iec61850.scl" version="1.0.0.qualifier">
       <category name="RiseClipseSCL"/>
    </feature>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.main_1.0.0.qualifier.jar" id="fr.centralesupelec.edf.riseclipse.feature.main" version="1.0.0.qualifier">
+   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.editor_1.0.0.qualifier.jar" id="fr.centralesupelec.edf.riseclipse.feature.editor" version="1.0.0.qualifier">
       <category name="RiseClipseEditor"/>
    </feature>
    <category-def name="RiseClipse" label="RiseClipse"/>
