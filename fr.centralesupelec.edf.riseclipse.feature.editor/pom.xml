@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-  <artifactId>fr.centralesupelec.edf.riseclipse.feature.main</artifactId>
+  <artifactId>fr.centralesupelec.edf.riseclipse.feature.editor</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
   
