@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>fr.centralesupelec.edf.riseclipse</groupId>
+  <artifactId>RiseClipseDeveloper</artifactId>
+  <version>1.0.2-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <parent>
+    <groupId>fr.centralesupelec.edf.riseclipse</groupId>
+    <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-root</artifactId>
+    <version>1.0.2-SNAPSHOT</version>
+    <relativePath>fr.centralesupelec.edf.riseclipse.developer.maven/pom-root.xml</relativePath>
+  </parent>
+
+  <scm>
+    <connection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDeveloper.git</connection>
+    <developerConnection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDeveloper.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+  
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-source-plugin</artifactId>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <modules>
+    <!-- Have to find a way to install/deploy pom-root -->
+    <!--module>fr.centralesupelec.edf.riseclipse.developer.maven</module-->
+    <module>fr.centralesupelec.edf.riseclipse.feature.all</module>
+    <module>fr.centralesupelec.edf.riseclipse.feature.editor</module>
+    <module>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</module>
+    <module>fr.centralesupelec.edf.riseclipse.update-site</module>
+  </modules>
+
+</project>
