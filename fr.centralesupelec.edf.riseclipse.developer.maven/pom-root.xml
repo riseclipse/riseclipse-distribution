@@ -20,7 +20,7 @@
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-root</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <properties>
@@ -56,12 +56,12 @@
         <snapshotRepository>
           <id>nexus</id>
           <name>Nexus Snapshots</name>
-          <url>http://riseclipse-ci.supelec.fr:8081/repository/maven-snapshots/</url>
+          <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
         <repository>
           <id>nexus</id>
           <name>Nexus Releases</name>
-          <url>http://riseclipse-ci.supelec.fr:8081/repository/maven-releases/</url>
+          <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/releases/</url>
         </repository>
       </distributionManagement>
     </profile>
