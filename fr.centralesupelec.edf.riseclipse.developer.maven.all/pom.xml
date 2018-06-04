@@ -6,23 +6,25 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-  <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-all</artifactId>
+  <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven.all</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-    <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-root</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
-    <relativePath>./pom-root.xml</relativePath>
+    <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
+    <version>1.0.3-SNAPSHOT</version>
+    <relativePath>../fr.centralesupelec.edf.riseclipse.developer.maven/pom.xml</relativePath>
   </parent>
 
   <modules>
+    <module>../../RiseClipseDeveloper</module>
     <module>../../RiseClipseMain</module>
     <module>../../RiseClipseEditor</module>
     <module>../../RiseClipseMetamodel_SCL2003</module>
     <module>../../RiseClipseMetamodel_Cim</module>
     <module>../../RiseClipseMetamodel_Cim16</module>
+    <module>../../RiseClipseMetamodel_EntsoeCim16</module>
     <module>../../RiseClipseMetamodel_Cim17</module>
     <module>../../RiseClipseMetamodel_iec61970cim17</module>
     <module>../../RiseClipseMetamodel_iec61970cim17_iec61968cim13</module>
@@ -39,14 +41,9 @@
          The ANTLR runtime 3.2.0 must also be installed by hand in the local .m2 repository
          using the provided org.antlr.runtime-3.2.0.zip (unzip it in ~/.m2/repository/ 
          replacing the 4.0.0 version)
-         
-         And the root POM file must be installed with the folowing command:
-           mvn install:install-file -Dfile=pom-root.xml \
-           -DgroupId=fr.centralesupelec.edf.riseclipse \
-           -DartifactId=fr.centralesupelec.edf.riseclipse.developer.maven-root \
-           -Dversion=1.0.0 -Dpackaging=pom
      -->
     <module>../../RiseClipseOCLValidator_SCL2003</module>
+    <module>../../RiseClipseOCLValidator_EntsoeCim16</module>
   </modules>
 
 </project>
