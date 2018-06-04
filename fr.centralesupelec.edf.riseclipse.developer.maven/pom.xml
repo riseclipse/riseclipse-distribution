@@ -44,6 +44,18 @@
   <profiles>
     <profile>
       <id>use-nexus-on-riceclipse-ci</id>
+      
+      <repositories>
+        <repository>
+          <id>nexus-snapshots</id>
+          <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+          <id>nexus-releases</id>
+          <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/releases/</url>
+        </repository>
+      </repositories>
+      
       <distributionManagement>
         <snapshotRepository>
           <id>nexus</id>
@@ -56,6 +68,7 @@
           <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/releases/</url>
         </repository>
       </distributionManagement>
+      
     </profile>
   </profiles>
   
