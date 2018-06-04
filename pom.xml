@@ -12,9 +12,9 @@
   
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-    <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven-root</artifactId>
-    <version>1.0.2</version>
-    <relativePath>fr.centralesupelec.edf.riseclipse.developer.maven/pom-root.xml</relativePath>
+    <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
+    <version>1.0.3-SNAPSHOT</version>
+    <relativePath>fr.centralesupelec.edf.riseclipse.developer.maven/pom.xml</relativePath>
   </parent>
 
   <scm>
@@ -23,39 +23,12 @@
     <tag>HEAD</tag>
   </scm>
   
-  <build>
-    <plugins>
-
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-packaging-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-source-plugin</artifactId>
-      </plugin>
-
-    </plugins>
-  </build>
-
   <modules>
-    <!-- Have to find a way to install/deploy pom-root -->
-    <!--module>fr.centralesupelec.edf.riseclipse.developer.maven</module-->
-    <module>fr.centralesupelec.edf.riseclipse.feature.all</module>
+    <module>fr.centralesupelec.edf.riseclipse.developer.maven</module>
+    <!--module>fr.centralesupelec.edf.riseclipse.feature.all</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.editor</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</module>
-    <module>fr.centralesupelec.edf.riseclipse.update-site</module>
+    <module>fr.centralesupelec.edf.riseclipse.update-site</module-->
   </modules>
 
 </project>
