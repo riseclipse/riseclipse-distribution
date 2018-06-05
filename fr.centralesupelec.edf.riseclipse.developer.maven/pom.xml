@@ -38,37 +38,6 @@
     <log4j-version>1.2.17</log4j-version>
   </properties>
 
-  <profiles>
-    <profile>
-      <id>use-nexus-on-riceclipse-ci</id>
-      
-      <repositories>
-        <repository>
-          <id>nexus-snapshots</id>
-          <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-          <id>nexus-releases</id>
-          <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/releases/</url>
-        </repository>
-      </repositories>
-      
-      <distributionManagement>
-        <snapshotRepository>
-          <id>nexus</id>
-          <name>Nexus Snapshots</name>
-          <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-          <id>nexus</id>
-          <name>Nexus Releases</name>
-          <url>http://riseclipse-ci.supelec.fr:8081/nexus/content/repositories/releases/</url>
-        </repository>
-      </distributionManagement>
-      
-    </profile>
-  </profiles>
-  
   <repositories>
     <repository>
       <id>eclipse-oxygen</id>
@@ -77,6 +46,21 @@
     </repository>
   </repositories>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>riseclipse-distribution-server</id>
+      <name>RiseClipse Snapshots</name>
+      <!-- This property is expected to be defined in settings.xml -->
+      <url>${riseclipse-distribution-server-snapshots-url}</url>
+    </snapshotRepository>
+    <repository>
+      <id>riseclipse-distribution-server</id>
+      <name>RiseClipse Releases</name>
+      <!-- This property is expected to be defined in settings.xml -->
+      <url>${riseclipse-distribution-server-releases-url}</url>
+    </repository>
+  </distributionManagement>
+      
   <build>
     <pluginManagement>
       <plugins>
