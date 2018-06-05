@@ -9,14 +9,14 @@
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
     <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
     <relativePath>fr.centralesupelec.edf.riseclipse.developer.maven/pom.xml</relativePath>
   </parent>
 
   <scm>
     <connection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDeveloper.git</connection>
     <developerConnection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDeveloper.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v1.0.4</tag>
   </scm>
   
   <modules>
