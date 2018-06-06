@@ -3,13 +3,13 @@
    <description name="Update site for RiseClipse" url="http://wdi.supelec.fr/riseclipse-update-site/1.0/">
       RiseClipse is an umbrella name for tools based on Model Driven Engineering (MDE) technologies and dedicated to IEC standards. These tools are developed in the context of RISEGrid and used within or based on Eclipse or its plugins.
    </description>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.all_1.0.0.qualifier.jar" id="fr.centralesupelec.edf.riseclipse.feature.all" version="1.0.0.qualifier">
+   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.all_1.0.0.jar" id="fr.centralesupelec.edf.riseclipse.feature.all" version="1.0.0">
       <category name="RiseClipse"/>
    </feature>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.iec61850.scl_1.0.0.qualifier.jar" id="fr.centralesupelec.edf.riseclipse.feature.iec61850.scl" version="1.0.0.qualifier">
+   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.iec61850.scl_1.0.0.jar" id="fr.centralesupelec.edf.riseclipse.feature.iec61850.scl" version="1.0.0">
       <category name="RiseClipseSCL"/>
    </feature>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.editor_1.0.0.qualifier.jar" id="fr.centralesupelec.edf.riseclipse.feature.editor" version="1.0.0.qualifier">
+   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.editor_1.0.0.jar" id="fr.centralesupelec.edf.riseclipse.feature.editor" version="1.0.0">
       <category name="RiseClipseEditor"/>
    </feature>
    <category-def name="RiseClipse" label="RiseClipse"/>
