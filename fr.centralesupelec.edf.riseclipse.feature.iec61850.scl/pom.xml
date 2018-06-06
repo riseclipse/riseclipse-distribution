@@ -1,23 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
   
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
     <artifactId>RiseClipseDeveloper</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.6-SNAPSHOT</version>
   </parent>
 
-  <!-- It should be specified in pom-root, but then Maven fails to find dependencied ??
-  -->
   <build>
     <plugins>
       <plugin>
@@ -25,22 +20,34 @@
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho-version}</version>
         <configuration>
+          <!-- This needed parameter seems to be ignored if put in the pom root file -->
           <pomDependencies>consider</pomDependencies>
         </configuration>
       </plugin>
     </plugins>
   </build>
   
-  <!-- RiseClipse needed plugins
-       See https://wiki.eclipse.org/Tycho/Target_Platform "POM dependencies consider"
-       However, only editor is required, not main, nor scl !
-   -->
+  <!-- RiseClipse plugins needed -->
   <dependencies>
+  
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-      <artifactId>fr.centralesupelec.edf.riseclipse.editor</artifactId>
-      <version>1.0.0</version>
+      <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
+      <version>1.0.1</version>
     </dependency>
+    
+    <dependency>
+      <groupId>fr.centralesupelec.edf.riseclipse</groupId>
+      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>fr.centralesupelec.edf.riseclipse</groupId>
+      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl.edit</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+    
   </dependencies>
 
 </project>

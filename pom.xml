@@ -9,7 +9,7 @@
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
     <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.0.6-SNAPSHOT</version>
     <relativePath>fr.centralesupelec.edf.riseclipse.developer.maven/pom.xml</relativePath>
   </parent>
 
@@ -21,10 +21,10 @@
   
   <modules>
     <module>fr.centralesupelec.edf.riseclipse.developer.maven</module>
-    <!--module>fr.centralesupelec.edf.riseclipse.feature.all</module>
+    <module>fr.centralesupelec.edf.riseclipse.feature.all</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.editor</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</module>
-    <module>fr.centralesupelec.edf.riseclipse.update-site</module-->
+    <module>fr.centralesupelec.edf.riseclipse.update-site</module>
   </modules>
 
 </project>

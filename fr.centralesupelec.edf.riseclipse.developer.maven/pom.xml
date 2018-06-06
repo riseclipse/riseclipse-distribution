@@ -9,7 +9,7 @@
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
-  <version>1.0.5-SNAPSHOT</version>
+  <version>1.0.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <properties>
@@ -98,8 +98,14 @@
           <version>${tycho-version}</version>
           <configuration>
             <!--
-              This was in the students POM files, not sure why and when it is needed,
-              so commented out for the moment
+              We need this configuration parameter in order to build plugins which
+              depend on other RiseClipse plugins.
+              See https://wiki.eclipse.org/Tycho/Target_Platform "POM dependencies consider"
+              
+              However, putting it here, in the pom root file, either in the pluginManagement
+              section or in the plugins section, does not seem to work. Therefore, this 
+              parameter is set in each leaf pom.
+
               <pomDependencies>consider</pomDependencies>
             -->
   
@@ -182,6 +188,11 @@
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
+        <!-- see above, does not work either
+        <configuration>
+          <pomDependencies>consider</pomDependencies>
+        </configuration>
+        -->
       </plugin>
 
       <plugin>
