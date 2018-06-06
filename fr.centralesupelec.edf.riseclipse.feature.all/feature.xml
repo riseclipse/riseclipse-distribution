@@ -20,7 +20,7 @@
 <feature
       id="fr.centralesupelec.edf.riseclipse.feature.all"
       label="%featureName"
-      version="1.0.0.qualifier"
+      version="1.0.0"
       provider-name="%providerName">
 
    <description url="%descriptionURL">
