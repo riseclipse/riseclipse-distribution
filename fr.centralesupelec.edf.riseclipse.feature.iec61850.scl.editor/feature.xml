@@ -20,7 +20,7 @@
 <feature
       id="fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor"
       label="%featureName"
-      version="1.0.1.qualifier"
+      version="1.0.1"
       provider-name="%providerName">
 
    <description url="%descriptionURL">
