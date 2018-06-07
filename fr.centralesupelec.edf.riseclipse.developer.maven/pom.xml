@@ -9,7 +9,7 @@
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
-  <version>1.0.6</version>
+  <version>1.0.7-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <properties>
