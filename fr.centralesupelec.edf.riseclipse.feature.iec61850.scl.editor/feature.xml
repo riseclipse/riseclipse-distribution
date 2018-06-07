@@ -18,9 +18,9 @@
       http://wdi.supelec.fr/software/RiseClipse/
 -->
 <feature
-      id="fr.centralesupelec.edf.riseclipse.feature.all"
+      id="fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor"
       label="%featureName"
-      version="1.0.1.qualifier"
+      version="1.0.2.qualifier"
       provider-name="%providerName">
 
    <description url="%descriptionURL">
