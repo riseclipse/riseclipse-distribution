@@ -4,7 +4,7 @@
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.feature.cim.cim16.entsoe</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
   
   <parent>

@@ -4,13 +4,13 @@
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
   
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
     <artifactId>RiseClipseDeveloper</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8-SNAPSHOT</version>
   </parent>
 
   <build>
@@ -33,13 +33,13 @@
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.feature.editor</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3-SNAPSHOT</version>
     </dependency>
     
   </dependencies>

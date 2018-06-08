@@ -20,7 +20,7 @@
 <feature
       id="fr.centralesupelec.edf.riseclipse.feature.cim.cim16.entsoe.editor"
       label="%featureName"
-      version="1.0.0"
+      version="1.0.1.qualifier"
       provider-name="%providerName">
 
    <description url="%descriptionURL">
