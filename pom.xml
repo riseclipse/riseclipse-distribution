@@ -24,6 +24,8 @@
     <module>fr.centralesupelec.edf.riseclipse.feature.editor</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor</module>
+    <module>fr.centralesupelec.edf.riseclipse.feature.cim.cim16.entsoe</module>
+    <module>fr.centralesupelec.edf.riseclipse.feature.cim.cim16.entsoe.editor</module>
     <module>fr.centralesupelec.edf.riseclipse.update-site</module>
   </modules>
 
