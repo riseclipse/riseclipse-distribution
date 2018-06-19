@@ -10,7 +10,7 @@
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
     <artifactId>RiseClipseDeveloper</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.8-SNAPSHOT</version>
   </parent>
 
   <build>
@@ -33,43 +33,43 @@
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.util</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.headerModel</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.headerModel.edit</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.cim16.util</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.cim16.entsoe-v2.4.15</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.cim16.entsoe-v2.4.15.edit</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     
   </dependencies>
