@@ -9,7 +9,7 @@
   
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-    <artifactId>RiseClipseDeveloper</artifactId>
+    <artifactId>RiseClipseDistribution</artifactId>
     <version>1.0.8-SNAPSHOT</version>
   </parent>
 
