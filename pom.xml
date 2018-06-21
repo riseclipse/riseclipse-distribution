@@ -3,24 +3,24 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-  <artifactId>RiseClipseDeveloper</artifactId>
+  <artifactId>RiseClipseDistribution</artifactId>
+  <version>1.0.8-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
     <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
     <version>1.0.8-SNAPSHOT</version>
-    <relativePath>fr.centralesupelec.edf.riseclipse.developer.maven/pom.xml</relativePath>
+    <relativePath>../RiseClipseDeveloper/fr.centralesupelec.edf.riseclipse.developer.maven/pom.xml</relativePath>
   </parent>
 
   <scm>
-    <connection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDeveloper.git</connection>
-    <developerConnection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDeveloper.git</developerConnection>
+    <connection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDistribution.git</connection>
+    <developerConnection>scm:git:git@gitlab.centralesupelec.fr:RiseClipseGroup/RiseClipseDistribution.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
   
   <modules>
-    <module>fr.centralesupelec.edf.riseclipse.developer.maven</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.editor</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</module>
     <module>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor</module>
