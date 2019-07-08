@@ -9,7 +9,7 @@
   
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-    <artifactId>RiseClipseDistribution</artifactId>
+    <artifactId>riseclipse-distribution</artifactId>
     <version>1.0.8-SNAPSHOT</version>
   </parent>
 
@@ -69,6 +69,12 @@
     <dependency>
       <groupId>fr.centralesupelec.edf.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.cim16.entsoe-v2.4.15.edit</artifactId>
+      <version>1.0.1-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>fr.centralesupelec.edf.riseclipse</groupId>
+      <artifactId>fr.centralesupelec.edf.riseclipse.cim.cim16.entsoe-v2.4.15.utilities</artifactId>
       <version>1.0.1-SNAPSHOT</version>
     </dependency>
     
