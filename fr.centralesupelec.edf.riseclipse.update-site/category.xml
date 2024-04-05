@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 *************************************************************************
-**  Copyright (c) 2019 CentraleSupélec & EDF.
+**  Copyright (c) 2016-2024 CentraleSupélec & EDF.
 **  All rights reserved. This program and the accompanying materials
 **  are made available under the terms of the Eclipse Public License v2.0
 **  which accompanies this distribution, and is available at
@@ -16,11 +16,11 @@
 **      dominique.marcadet@centralesupelec.fr
 **      aurelie.dehouck-neveu@edf.fr
 **  Web site:
-**      http://wdi.supelec.fr/software/RiseClipse/
+**      https://riseclipse.github.io
 *************************************************************************
 -->
 <site>
-   <description name="Update site for RiseClipse" url="http://wdi.supelec.fr/riseclipse-update-site/1.0/">
+   <description name="Update site for RiseClipse" url="http://wdi.centralesupelec.fr/riseclipse-update-site/1.0/">
       RiseClipse is an umbrella name for tools based on Model Driven Engineering (MDE) technologies and dedicated to IEC standards. These tools are developed in the context of RISEGrid and used within or based on Eclipse or its plugins.
    </description>
    <feature url="features/fr.centralesupelec.edf.riseclipse.feature.iec61850.scl_1.0.3.qualifier.jar"            id="fr.centralesupelec.edf.riseclipse.feature.iec61850.scl"            version="1.0.3.qualifier">
