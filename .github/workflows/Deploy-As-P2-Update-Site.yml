@@ -42,6 +42,10 @@ jobs:
         cd ${{ github.event.repository.name }}
         mvn verify
 
+    - name: Display what is available
+      run: |
+        ls -lR
+
     - name: Upload flat p2 update site
       if: github.ref == 'refs/heads/master'
       uses: marvinpinto/action-automatic-releases@latest
