@@ -4,3 +4,5 @@
 
 ## riseclipse-distribution
 This repository contains projects used to generate **RiseClipse** features and **RiseClipse** update-site.
+
+URL of the update site: [Eclipse update site](https://github.com/riseclipse/riseclipse-distribution/releases/download/latest/)
