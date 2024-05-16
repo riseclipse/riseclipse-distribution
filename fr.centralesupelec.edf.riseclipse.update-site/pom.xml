@@ -43,26 +43,6 @@
       <id>flat-repo</id>
       <build>
         <plugins>
-          <plugin>
-            <groupId>dev.jbang</groupId>
-            <artifactId>jbang-maven-plugin</artifactId>
-            <version>0.0.7</version>
-            <executions>
-              <execution>
-                <id>run</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                  <configuration>
-                    <script>${project.basedir}/jbang/RepoFlattener.java</script>
-                    <args>
-                      <arg>${project.basedir}</arg>
-                    </args>
-                  </configuration>
-              </execution>
-            </executions>
-          </plugin>
         </plugins>
       </build>
     </profile>
@@ -80,6 +60,27 @@
         </configuration>
       </plugin>
     </plugins>
+
+    <plugin>
+      <groupId>dev.jbang</groupId>
+      <artifactId>jbang-maven-plugin</artifactId>
+      <version>0.0.7</version>
+      <executions>
+        <execution>
+          <id>run</id>
+          <phase>package</phase>
+          <goals>
+            <goal>run</goal>
+          </goals>
+            <configuration>
+              <script>${project.basedir}/jbang/RepoFlattener.java</script>
+              <args>
+                <arg>${project.basedir}</arg>
+              </args>
+            </configuration>
+        </execution>
+      </executions>
+    </plugin>
   </build>
   
   <!-- RiseClipse plugins needed -->

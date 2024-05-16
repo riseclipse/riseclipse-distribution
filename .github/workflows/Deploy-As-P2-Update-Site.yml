@@ -39,7 +39,7 @@ jobs:
         maven-version: 3.9.6
 
     - name: Build with Maven
-      run: mvn --batch-mode --update-snapshots package -Pflat-repo
+      run: mvn package
 
     - name: Upload flat p2 update site
       if: github.ref == 'refs/heads/main'
