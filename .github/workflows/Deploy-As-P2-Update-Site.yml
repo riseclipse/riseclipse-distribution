@@ -41,7 +41,9 @@ jobs:
         maven-version: 3.9.6
 
     - name: Build with Maven
-      run: mvn package
+      run: |
+        cd ${{ github.event.repository.name }}
+        mvn verify
 
     - name: Upload flat p2 update site
       if: github.ref == 'refs/heads/main'
