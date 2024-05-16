@@ -24,6 +24,9 @@ jobs:
       with:
         path: ${{ github.event.repository.name }}
 
+    - name: Display current content
+      run: ls -lR
+
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
