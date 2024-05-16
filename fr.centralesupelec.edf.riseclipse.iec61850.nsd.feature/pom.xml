@@ -28,28 +28,44 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>io.github.riseclipse</groupId>
-  <artifactId>riseclipse-distribution</artifactId>
-  <version>1.2.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</artifactId>
+  <version>1.2.11</version>
+  <packaging>eclipse-feature</packaging>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
-    <artifactId>fr.centralesupelec.edf.riseclipse.developer.maven</artifactId>
-    <version>1.2.12</version>
+    <artifactId>riseclipse-metamodel-nsd2016</artifactId>
+    <version>1.2.11</version>
+    <relativePath>../riseclipse-metamodel-nsd2016/pom.xml</relativePath>
   </parent>
 
-  <scm>
-    <connection>scm:git:git@github.com:riseclipse/riseclipse-distribution.git</connection>
-    <developerConnection>scm:git:git@github.com:riseclipse/riseclipse-distribution.git</developerConnection>
-    <url>https://github.com/riseclipse/riseclipse-distribution</url>
-    <tag>HEAD</tag>
-  </scm>
+  <!-- RiseClipse plugins needed -->
+  <dependencies>
   
-  <modules>
-    <module>fr.centralesupelec.edf.riseclipse.editor.feature</module>
-    <module>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</module>
-    <module>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</module>
-    <module>fr.centralesupelec.edf.riseclipse.update-site</module>
-  </modules>
+    <dependency>
+      <groupId>io.github.riseclipse</groupId>
+      <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
+      <version>1.2.10</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>io.github.riseclipse</groupId>
+      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd</artifactId>
+      <version>1.2.11</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>io.github.riseclipse</groupId>
+      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.edit</artifactId>
+      <version>1.2.11</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>io.github.riseclipse</groupId>
+      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.utilities</artifactId>
+      <version>1.2.11</version>
+    </dependency>
+    
+  </dependencies>
 
 </project>

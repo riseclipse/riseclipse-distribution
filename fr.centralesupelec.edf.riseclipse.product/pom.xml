@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 *************************************************************************
-**  Copyright (c) 2016-2021 CentraleSupélec & EDF.
+**  Copyright (c) 2016-2024 CentraleSupélec & EDF.
 **  All rights reserved. This program and the accompanying materials
 **  are made available under the terms of the Eclipse Public License v2.0
 **  which accompanies this distribution, and is available at
@@ -28,45 +28,40 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-  <artifactId>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
-  <packaging>eclipse-feature</packaging>
+  <artifactId>fr.centralesupelec.edf.riseclipse.product</artifactId>
+  <version>1.2.0-SNAPSHOT</version>
+  <packaging>eclipse-repository</packaging>
   
   <parent>
     <groupId>fr.centralesupelec.edf.riseclipse</groupId>
     <artifactId>riseclipse-distribution</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
   </parent>
 
+  <!-- if only one .product file is present, it will be found and processed -->
   <build>
     <plugins>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
+        <artifactId>tycho-p2-director-plugin</artifactId>
         <version>${tycho-version}</version>
         <configuration>
-          <!-- This needed parameter seems to be ignored if put in the pom root file -->
-          <pomDependencies>consider</pomDependencies>
+          <formats>
+            <win32>zip</win32>
+            <linux>tar.gz</linux>
+            <macosx>tar.gz</macosx>
+          </formats>
         </configuration>
+        <executions>
+          <execution>
+            <id>materialize-products</id>
+            <goals>
+              <goal>materialize-products</goal>
+              <goal>archive-products</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
-  
-  <!-- RiseClipse plugins needed -->
-  <dependencies>
-  
-    <dependency>
-      <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-      <artifactId>fr.centralesupelec.edf.riseclipse.feature.editor</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>fr.centralesupelec.edf.riseclipse</groupId>
-      <artifactId>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
-    </dependency>
-    
-  </dependencies>
-
 </project>

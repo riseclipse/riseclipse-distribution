@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 *************************************************************************
-**  Copyright (c) 2019 CentraleSupélec & EDF.
+**  Copyright (c) 2024 CentraleSupélec & EDF.
 **  All rights reserved. This program and the accompanying materials
 **  are made available under the terms of the Eclipse Public License v2.0
 **  which accompanies this distribution, and is available at
@@ -16,36 +16,30 @@
 **      dominique.marcadet@centralesupelec.fr
 **      aurelie.dehouck-neveu@edf.fr
 **  Web site:
-**      http://wdi.supelec.fr/software/RiseClipse/
+**      https://riseclipse.github.io
 *************************************************************************
 -->
 <site>
-   <description name="Update site for RiseClipse" url="http://wdi.supelec.fr/riseclipse-update-site/1.0/">
+   <description name="Update site for RiseClipse" url="http://wdi.centralesupelec.fr/riseclipse-update-site/1.0/">
       RiseClipse is an umbrella name for tools based on Model Driven Engineering (MDE) technologies and dedicated to IEC standards. These tools are developed in the context of RISEGrid and used within or based on Eclipse or its plugins.
    </description>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.iec61850.scl_1.0.3.qualifier.jar"            id="fr.centralesupelec.edf.riseclipse.feature.iec61850.scl"            version="1.0.3.qualifier">
+   <feature id="fr.centralesupelec.edf.riseclipse.iec61850.scl.feature">
       <category name="RiseClipseMetamodels"/>
    </feature>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.cim.cim16.entsoe_1.0.1.qualifier.jar"        id="fr.centralesupelec.edf.riseclipse.feature.cim.cim16.entsoe"        version="1.0.1.qualifier">
+   <feature id="fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature">
       <category name="RiseClipseMetamodels"/>
    </feature>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.editor_1.0.3.qualifier.jar"                  id="fr.centralesupelec.edf.riseclipse.feature.editor"                  version="1.0.3.qualifier">
-      <category name="RiseClipseEditors"/>
+   <feature id="fr.centralesupelec.edf.riseclipse.editor.feature">
+      <category name="RiseClipseEditor"/>
    </feature>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor_1.0.3.qualifier.jar"     id="fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor"     version="1.0.3.qualifier">
-      <category name="RiseClipseEditors"/>
-   </feature>
-   <feature url="features/fr.centralesupelec.edf.riseclipse.feature.cim.cim16.entsoe.editor_1.0.1.qualifier.jar" id="fr.centralesupelec.edf.riseclipse.feature.cim.cim16.entsoe.editor" version="1.0.1.qualifier">
-      <category name="RiseClipseEditors"/>
-   </feature>
-   <category-def name="RiseClipseEditors" label="RiseClipse Editor">
+   <category-def name="RiseClipseMetamodels" label="RiseClipse Metamodels">
       <description>
-         Specific RiseClipse Editor (based on generic EMF editor)
+         RiseClipse Metamodels
       </description>
    </category-def>
-   <category-def name="RiseClipseMetamodels" label="RiseClipse SCL support">
+   <category-def name="RiseClipseEditor" label="RiseClipse Editor">
       <description>
-         RiseClipse metamodels
+         RiseClipse Editor
       </description>
    </category-def>
 </site>

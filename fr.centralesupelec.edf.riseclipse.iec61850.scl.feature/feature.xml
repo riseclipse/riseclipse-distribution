@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+*************************************************************************
+**  Copyright (c) 2024 CentraleSupélec & EDF.
+**  All rights reserved. This program and the accompanying materials
+**  are made available under the terms of the Eclipse Public License v2.0
+**  which accompanies this distribution, and is available at
+**  https://www.eclipse.org/legal/epl-v20.html
+** 
+**  This file is part of the RiseClipse tool
+**  
+**  Contributors:
+**      Computer Science Department, CentraleSupélec
+**      EDF R&D
+**  Contacts:
+**      dominique.marcadet@centralesupelec.fr
+**      aurelie.dehouck-neveu@edf.fr
+**  Web site:
+**      https://riseclipse.github.io
+*************************************************************************
+-->
+<feature
+      id="fr.centralesupelec.edf.riseclipse.iec61850.scl.feature"
+      label="%featureName"
+      version="1.2.8"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="Update site for RiseClipse" url="http://wdi.centralesupelec.fr/riseclipse-update-site/1.0"/>
+      <discovery label="RiseClipse home" url="https://riseclipse.github.io"/>
+   </url>
+
+   <requires>
+      <import feature="org.eclipse.emf.common" version="2.31.0.v20231210-0956" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.ecore" version="2.37.0.v20240203-0859" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.edit" version="2.22.0.v20231208-1346" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="fr.centralesupelec.edf.riseclipse.iec61850.scl"
+         version="0.0.0"/>
+
+   <plugin
+         id="fr.centralesupelec.edf.riseclipse.iec61850.scl.edit"
+         version="0.0.0"/>
+
+   <plugin
+         id="fr.centralesupelec.edf.riseclipse.iec61850.scl.utilities"
+         version="0.0.0"/>
+
+   <plugin
+         id="fr.centralesupelec.edf.riseclipse.main"
+         version="0.0.0"/>
+
+</feature>
