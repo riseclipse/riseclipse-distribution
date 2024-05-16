@@ -23,7 +23,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         path: ${{ github.event.repository.name }}
-        fetch-depth: 0
 
     - name: Setup Java
       uses: actions/setup-java@v4
