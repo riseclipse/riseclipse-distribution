@@ -3,9 +3,8 @@
 	<name>fr.centralesupelec.edf.riseclipse.update-site</name>
 	<comment></comment>
 	<projects>
-		<project>fr.centralesupelec.edf.riseclipse.feature.editor</project>
-		<project>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</project>
-		<project>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl.editor</project>
+		<project>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</project>
+		<project>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

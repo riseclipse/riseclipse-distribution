@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 *************************************************************************
-**  Copyright (c) 2016-2024 CentraleSupélec & EDF.
+**  Copyright (c) 2024 CentraleSupélec & EDF.
 **  All rights reserved. This program and the accompanying materials
 **  are made available under the terms of the Eclipse Public License v2.0
 **  which accompanies this distribution, and is available at
@@ -28,30 +28,17 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>io.github.riseclipse</groupId>
-  <artifactId>fr.centralesupelec.edf.riseclipse.feature.iec61850.scl</artifactId>
-  <version>1.2.0-SNAPSHOT</version>
+  <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</artifactId>
+  <version>1.2.11</version>
   <packaging>eclipse-feature</packaging>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
-    <artifactId>riseclipse-distribution</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <artifactId>riseclipse-metamodel-nsd2016</artifactId>
+    <version>1.2.11</version>
+    <relativePath>../riseclipse-metamodel-nsd2016/pom.xml</relativePath>
   </parent>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-          <!-- This needed parameter seems to be ignored if put in the pom root file -->
-          <pomDependencies>consider</pomDependencies>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
   <!-- RiseClipse plugins needed -->
   <dependencies>
   
@@ -63,20 +50,20 @@
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
-      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl</artifactId>
-      <version>1.2.8</version>
+      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd</artifactId>
+      <version>1.2.11</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
-      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl.edit</artifactId>
-      <version>1.2.8</version>
+      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.edit</artifactId>
+      <version>1.2.11</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
-      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl.utilities</artifactId>
-      <version>1.2.8</version>
+      <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.utilities</artifactId>
+      <version>1.2.11</version>
     </dependency>
     
   </dependencies>
