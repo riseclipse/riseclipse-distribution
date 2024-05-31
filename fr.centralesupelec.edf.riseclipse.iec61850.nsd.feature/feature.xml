@@ -38,7 +38,7 @@
    </license>
 
    <url>
-      <update label="Update site for RiseClipse" url="http://wdi.centralesupelec.fr/riseclipse-update-site/1.0"/>
+      <update label="Update site for RiseClipse" url="https://github.com/riseclipse/riseclipse-distribution/releases/download/latest/"/>
       <discovery label="RiseClipse home" url="https://riseclipse.github.io"/>
    </url>
 

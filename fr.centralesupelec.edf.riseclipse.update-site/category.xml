@@ -20,13 +20,16 @@
 *************************************************************************
 -->
 <site>
-   <description name="Update site for RiseClipse" url="http://wdi.centralesupelec.fr/riseclipse-update-site/1.0/">
+   <description name="Update site for RiseClipse" url="https://github.com/riseclipse/riseclipse-distribution/releases/download/latest/">
       RiseClipse is an umbrella name for tools based on Model Driven Engineering (MDE) technologies and dedicated to IEC standards. These tools are developed in the context of RISEGrid and used within or based on Eclipse or its plugins.
    </description>
    <feature id="fr.centralesupelec.edf.riseclipse.iec61850.scl.feature">
       <category name="RiseClipseMetamodels"/>
    </feature>
    <feature id="fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature">
+      <category name="RiseClipseMetamodels"/>
+   </feature>
+   <feature id="fr.centralesupelec.edf.riseclipse.cim.cgmes-3.feature">
       <category name="RiseClipseMetamodels"/>
    </feature>
    <feature id="fr.centralesupelec.edf.riseclipse.editor.feature">
