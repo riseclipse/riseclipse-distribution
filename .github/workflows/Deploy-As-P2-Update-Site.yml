@@ -44,10 +44,11 @@ jobs:
 
     - name: Upload flat p2 update site
       if: github.ref == 'refs/heads/master'
-      uses: marvinpinto/action-automatic-releases@latest
+      uses: crowbarmaster/GH-Automatic-Releases@latest
       with:
         repo_token: "${{secrets.GITHUB_TOKEN}}"
         automatic_release_tag: "latest"
+        prerelease: false
         title: "Latest releases"
         files: |
           ${{ github.event.repository.name }}/fr.centralesupelec.edf.riseclipse.update-site/target/flat-repository/*
