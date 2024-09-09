@@ -29,13 +29,13 @@
  
   <groupId>io.github.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</artifactId>
-  <version>1.2.9</version>
+  <version>1.2.12</version>
   <packaging>eclipse-feature</packaging>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
     <artifactId>riseclipse-metamodel-scl2003</artifactId>
-    <version>1.2.9</version>
+    <version>1.2.12</version>
     <relativePath>../riseclipse-metamodel-scl2003/pom.xml</relativePath>
   </parent>
 
@@ -45,25 +45,25 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
-      <version>1.2.10</version>
+      <version>1.2.11</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl</artifactId>
-      <version>1.2.9</version>
+      <version>1.2.12</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl.edit</artifactId>
-      <version>1.2.9</version>
+      <version>1.2.12</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl.utilities</artifactId>
-      <version>1.2.9</version>
+      <version>1.2.12</version>
     </dependency>
     
   </dependencies>
