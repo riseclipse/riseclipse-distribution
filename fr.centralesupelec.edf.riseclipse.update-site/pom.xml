@@ -31,6 +31,7 @@
   <artifactId>fr.centralesupelec.edf.riseclipse.update-site</artifactId>
   <version>1.2.0-SNAPSHOT</version>
   <packaging>eclipse-repository</packaging>
+  <name>[eclipse] RiseClipse Update Site</name>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
@@ -89,25 +90,25 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.editor.feature</artifactId>
-      <version>1.2.0</version>
+      <version>1.2.0-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</artifactId>
-      <version>1.2.13</version>
+      <version>1.2.14-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</artifactId>
-      <version>1.2.11</version>
+      <version>1.2.12-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.cgmes-3.feature</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3-SNAPSHOT</version>
     </dependency>
     
   </dependencies>
