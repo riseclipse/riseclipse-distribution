@@ -1,0 +1,31 @@
+target "RiseClipse RCP"
+
+include "../../riseclipse-developer/fr.centralesupelec.edf.riseclipse.developer.eclipse/fr.centralesupelec.edf.riseclipse.developer.eclipse.tpd"
+
+location "http://download.eclipse.org/releases/2024-12" eclipse-2024-12 {
+	com.google.guava lazy
+	com.google.inject lazy
+	org.apache.commons.io lazy
+	org.apache.commons.logging lazy
+	org.eclipse.e4.core.tools.feature.feature.group lazy
+	org.eclipse.egit.feature.group lazy
+	org.eclipse.emf.feature.group lazy
+	org.eclipse.emf.validation.sdk.feature.group lazy
+	org.eclipse.emf.workspace.feature.group lazy
+	org.eclipse.epp.mpc.feature.group lazy
+	org.eclipse.equinox.executable.feature.group lazy
+	org.eclipse.equinox.p2.user.ui.feature.group lazy
+	org.eclipse.jdt.annotation lazy
+	org.eclipse.ocl.examples.feature.group lazy
+	org.eclipse.ocl.feature.group lazy
+	org.eclipse.platform lazy
+	org.eclipse.rcp.feature.group lazy
+	org.eclipse.ui.console lazy
+	org.eclipse.ui.ide lazy
+	org.eclipse.ui.views lazy
+}
+
+location "https://download.eclipse.org/justj/jres/21/updates/release" justj {
+	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group lazy
+}
+
