@@ -123,7 +123,7 @@ jobs:
         mv riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*.zip .
         ls -m *.tar.gz *.zip
         ARTIFACT_LIST="$(ls -m *.tar.gz *.zip)"
-        echo ${ARTIFACT_LIST}"
+        echo "${ARTIFACT_LIST}"
         echo "artifact_list=${ARTIFACT_LIST}"
         echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
       id: artifacts_metadata
