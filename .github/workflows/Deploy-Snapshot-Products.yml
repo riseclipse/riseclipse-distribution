@@ -125,24 +125,20 @@ jobs:
         ARTIFACT_LIST="$(ls -m *.tar.gz *.zip | tr -d '\n')"
         echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
         ARTIFACT_LIST="$(ls -1 *.tar.gz *.zip)"
-        ARTIFACT_LINKS=""
-        ARTIFACT_PATH=""
+        echo '<html>'                                        > /tmp/message.html
+        echo '<head>'                                       >> /tmp/message.html
+        echo '<meta charset="utf-8">'                       >> /tmp/message.html
+        echo '</head>'                                      >> /tmp/message.html
+        echo '<body>'                                       >> /tmp/message.html
+        echo '<p>The following variants are available:</p>' >> /tmp/message.html
+        echo '<ul>'                                         >> /tmp/message.html
         for ARTIFACT in ${ARTIFACT_LIST}
         do
-          ARTIFACT_PATH=https://rise-clipse.pam-retd.fr/front_v2/develop/${ARTIFACT}
-          ARTIFACT_LINKS="${ARTIFACT_LINKS}"$'\n'"${ARTIFACT_PATH}"
+          echo '<li>'https://rise-clipse.pam-retd.fr/front_v2/develop/${ARTIFACT}'</li>' >> /tmp/message.html
         done
-        echo "----"
-        echo "${ARTIFACT_LINKS}"
-        echo "----"
-        echo -e "${ARTIFACT_LINKS}"
-        echo "----"
-        echo "artifact_links=${ARTIFACT_LINKS}"
-        echo "----"
-        echo -e "artifact_links=${ARTIFACT_LINKS}"
-        echo "----"
-        echo "artifact_links=${ARTIFACT_LINKS}" >> $GITHUB_OUTPUT
-        
+        echo '</ul>'                                        >> /tmp/message.html
+        echo '</body>'                                      >> /tmp/message.html
+        echo '</html>'                                      >> /tmp/message.html
       id: artifacts_metadata
 
     - name: Copy artifacts
@@ -174,6 +170,6 @@ jobs:
         to: dominique.marcadet@centralesupelec.fr
         # Required sender full name (address can be skipped):
         from: riseclipse@gmail.com
-        # Optional plain body:
-        body: The following variants are available:${{ steps.artifacts_metadata.outputs.artifact_links }}
+        # Optional HTML body read from file:
+        html_body: file:///tmp/message.html
 
