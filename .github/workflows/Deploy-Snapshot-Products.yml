@@ -125,9 +125,22 @@ jobs:
         ARTIFACT_LIST="$(ls -m *.tar.gz *.zip | tr -d '\n')"
         echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
         ARTIFACT_LIST="$(ls -1 *.tar.gz *.zip)"
-        ARTIFACT_LINKS="\n"
-        for artifact in ${ARTIFACT_LIST};do ARTIFACT_LINKS="${ARTIFACT_LINKS}https://rise-clipse.pam-retd.fr/front_v2/develop/${artifact}\n";done
-        echo ${ARTIFACT_LINKS}
+        ARTIFACT_LINKS=""
+        ARTIFACT_PATH=""
+        for ARTIFACT in ${ARTIFACT_LIST}
+        do
+          ARTIFACT_PATH=https://rise-clipse.pam-retd.fr/front_v2/develop/${ARTIFACT}
+          ARTIFACT_LINKS="${ARTIFACT_LINKS}"$'\n'"${ARTIFACT_PATH}"
+        done
+        echo "----"
+        echo "${ARTIFACT_LINKS}"
+        echo "----"
+        echo -e "${ARTIFACT_LINKS}"
+        echo "----"
+        echo "artifact_links=${ARTIFACT_LINKS}"
+        echo "----"
+        echo -e "artifact_links=${ARTIFACT_LINKS}"
+        echo "----"
         echo "artifact_links=${ARTIFACT_LINKS}" >> $GITHUB_OUTPUT
         
       id: artifacts_metadata
@@ -152,9 +165,9 @@ jobs:
         # Optional whether this connection use TLS (default is true if server_port is 465)
         secure: true
         # Optional (recommended) mail server username:
-        username: ${{ secrets.MAIL_USERNAME }}
+        username: ${{ secrets.RISECLIPSE_GMAIL_USERNAME }}
         # Optional (recommended) mail server password:
-        password: ${{ secrets.MAIL_PASSWORD }}
+        password: ${{ secrets.RISECLIPSE_GMAIL_PASSWORD }}
         # Required mail subject:
         subject: New development version of "RiseClipse 61850 Application"
         # Required recipients' addresses:
