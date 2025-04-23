@@ -116,15 +116,27 @@ jobs:
       run: |
         cd ${{ github.event.repository.name }}
         mvn --batch-mode verify -Pdeploy-snapshots
+    
+    - name: build macOS x86_64 dmg
+      uses: L-Super/create-dmg-actions@v1.0.3
+      with:
+        dmg_name: 'RiseClipse IEC61850 Application (x86_64)'
+        src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse IEC61850 Application.app'
+
+    - name: build macOS aarch64 dmg
+      uses: L-Super/create-dmg-actions@v1.0.3
+      with:
+        dmg_name: 'RiseClipse IEC61850 Application (aarch64)'
+        src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/aarch64/RiseClipse IEC61850 Application.app'
 
     - name: Get artifact list
       run: |
         mv riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*.tar.gz .
         mv riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*.zip .
-        ls -m *.tar.gz *.zip
-        ARTIFACT_LIST="$(ls -m *.tar.gz *.zip | tr -d '\n')"
+        ls -l
+        ARTIFACT_LIST="$(ls -m *.tar.gz *.zip *.dmg | tr -d '\n')"
         echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
-        ARTIFACT_LIST="$(ls -1 *.tar.gz *.zip)"
+        ARTIFACT_LIST="$(ls -1 *.tar.gz *.zip *.dmg)"
         echo '<html>'                                        > /tmp/message.html
         echo '<head>'                                       >> /tmp/message.html
         echo '<meta charset="utf-8">'                       >> /tmp/message.html
