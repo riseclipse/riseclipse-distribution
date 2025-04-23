@@ -85,7 +85,6 @@
     <module>fr.centralesupelec.edf.riseclipse.editor.feature</module>
     <module>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</module>
     <module>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</module>
-    <module>fr.centralesupelec.edf.riseclipse.iec61850.editor.feature</module>
     <!-- module>fr.centralesupelec.edf.riseclipse.cim.cgmes-3.feature</module>
     <module>fr.centralesupelec.edf.riseclipse.update-site</module-->
     <module>fr.centralesupelec.edf.riseclipse.rcp</module>
