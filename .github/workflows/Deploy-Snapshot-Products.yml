@@ -32,6 +32,7 @@ jobs:
     runs-on: ubuntu-24.04
     name: Build rcp products
 
+    steps:
     - name: Checkout ${{ github.event.repository.name }}
       uses: actions/checkout@v4
       with:
@@ -39,7 +40,6 @@ jobs:
         ref: develop
         fetch-depth: 0
 
-    steps:
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
