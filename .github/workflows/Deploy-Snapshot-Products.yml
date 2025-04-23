@@ -117,3 +117,43 @@ jobs:
         cd ${{ github.event.repository.name }}
         mvn --batch-mode verify -Pdeploy-snapshots
 
+    - name: Get artifact list
+      run: |
+        mv riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*.tar.gz .
+        mv riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*.zip .
+        ARTIFACT_LIST="$(ls -m *.tar.gz *.zip)"
+        echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
+      id: artifacts_metadata
+
+    - name: Copy artifacts
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.RISECLIPSE_WEB_HOSTNAME }}
+        username: ${{ secrets.RISECLIPSE_WEB_USERNAME }}
+        key: ${{ secrets.RISECLIPSE_WEB_SSHKEY }}
+        passphrase: ${{ secrets.RISECLIPSE_WEB_PASSPHRASE }}
+        source: "${{ steps.artifacts_metadata.outputs.artifact_list }}"
+        target: develop
+        overwrite: true
+
+#     - name: Send email about this new development version
+#       uses: dawidd6/action-send-mail@v4
+#       with:
+#         server_address: smtp.gmail.com
+#         # Server port, default 25:
+#         server_port: 465
+#         # Optional whether this connection use TLS (default is true if server_port is 465)
+#         secure: true
+#         # Optional (recommended) mail server username:
+#         username: ${{ secrets.MAIL_USERNAME }}
+#         # Optional (recommended) mail server password:
+#         password: ${{ secrets.MAIL_PASSWORD }}
+#         # Required mail subject:
+#         subject: New development version of RiseClipse 61850 Applications
+#         # Required recipients' addresses:
+#         to: dominique.marcadet@centralesupelec.fr
+#         # Required sender full name (address can be skipped):
+#         from: riseclipse@gmail.com
+#         # Optional plain body:
+#         body: The new versions are available at https://rise-clipse.pam-retd.fr/front_v2/develop/${{ steps.artifacts_metadata.outputs.artifact_name }}
+
