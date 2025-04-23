@@ -112,23 +112,23 @@ jobs:
         cd riseclipse-metamodel-nsd2016
         mvn --batch-mode install -Pdeploy-snapshots
 
-    - name: build rcp
+    - name: Build rcp
       run: |
         cd ${{ github.event.repository.name }}
         mvn --batch-mode verify -Pdeploy-snapshots
     
-    - name: build macOS x86_64 dmg
+    - name: Build macOS x86_64 dmg
       uses: L-Super/create-dmg-actions@v1.0.3
       with:
-        dmg_name: 'RiseClipse IEC61850 Application (x86_64)'
+        dmg_name: 'RiseClipse IEC61850 Application (x86_64).dmg'
         src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse IEC61850 Application.app'
 #       run: |
 #         genisoimage -D -V 'RiseClipse IEC61850 Application (x86_64)' -no-pad -r -apple -o 'RiseClipse IEC61850 Application (x86_64).dmg' 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse IEC61850 Application.app'
 
-    - name: build macOS aarch64 dmg
+    - name: Build macOS aarch64 dmg
       uses: L-Super/create-dmg-actions@v1.0.3
       with:
-        dmg_name: 'RiseClipse IEC61850 Application (aarch64)'
+        dmg_name: 'RiseClipse IEC61850 Application (aarch64).dmg'
         src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/aarch64/RiseClipse IEC61850 Application.app'
 #       run: |
 #         genisoimage -D -V 'RiseClipse IEC61850 Application (aarch64)' -no-pad -r -apple -o 'RiseClipse IEC61850 Application (aarch64).dmg' 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/aarch64/RiseClipse IEC61850 Application.app'
