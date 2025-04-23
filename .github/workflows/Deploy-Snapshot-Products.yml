@@ -25,7 +25,9 @@ jobs:
   build:
     # Use a specific version to avoid unattended changes with latest
     runs-on: ubuntu-24.04
+    name: do nothing for now
 
+    steps:
     - name: say hello
       run: |
         echo "hello"
