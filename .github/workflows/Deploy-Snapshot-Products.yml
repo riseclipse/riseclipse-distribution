@@ -57,9 +57,62 @@ jobs:
     - name: Install root pom of develop branch
       run: |
         cd riseclipse-developer
-        mvn --batch-mode install
+        mvn --batch-mode install -Pdeploy-snapshots
 
-    - name: Execute verify (mvn verify)
+    # RiseClipse plugins are not found when building rcp products event if they are
+    # available on https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/io/github/riseclipse/
+    # It's OK when building update-site, but not for rcp ??
+    # So we install plugins on the runner
+    
+    - name: Checkout riseclipse-main
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-main
+        path: riseclipse-main
+        ref: develop
+
+    - name: Install main plugin
+      run: |
+        cd riseclipse-main
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    - name: Checkout riseclipse-editor
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-editor
+        path: riseclipse-editor
+        ref: develop
+
+    - name: Install editor plugin
+      run: |
+        cd riseclipse-editor
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    - name: Checkout riseclipse-metamodel-scl2003
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-metamodel-scl2003
+        path: riseclipse-metamodel-scl2003
+        ref: develop
+
+    - name: Install metamodel-scl2003 plugin
+      run: |
+        cd riseclipse-metamodel-scl2003
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    - name: Checkout riseclipse-metamodel-nsd2016
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-metamodel-nsd2016
+        path: riseclipse-metamodel-nsd2016
+        ref: develop
+
+    - name: Install metamodel-nsd2016 plugin
+      run: |
+        cd riseclipse-metamodel-nsd2016
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    - name: build rcp
       run: |
         cd ${{ github.event.repository.name }}
         mvn --batch-mode verify -Pdeploy-snapshots
