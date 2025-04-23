@@ -16,7 +16,8 @@ on: workflow_dispatch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Use a specific version to avoid unattended changes with latest
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout ${{ github.event.repository.name }}
@@ -30,12 +31,6 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
         cache: 'maven'
-
-    # Maven on ubuntu-22.04 is 3.8.8, Tycho wants at least 3.9
-    - name: Set up Maven
-      uses: stCarolas/setup-maven@v5
-      with:
-        maven-version: 3.9.6
 
     - name: Build with Maven
       run: |
