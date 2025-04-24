@@ -172,7 +172,7 @@ jobs:
         MACOS_ID: ${{ needs.build-products.outputs.macos-id }}
       uses: actions/download-artifact@v4
       with:
-        artifact-id: $MACOS_ID
+        artifact-ids: $MACOS_ID
     
     - name: untar macos products
       run: |
@@ -219,14 +219,14 @@ jobs:
         DMG_ID: ${{ needs.build-dmg.outputs.dmg-id }}
       uses: actions/download-artifact@v4
       with:
-        artifact-id: $DMG_ID
+        artifact-ids: $DMG_ID
     
     - name: download other products
       env:
         OTHER_ID: ${{ needs.build-products.outputs.other-id }}
       uses: actions/download-artifact@v4
       with:
-        artifact-id: $OTHER_ID
+        artifact-ids: $OTHER_ID
     
     - name: Get artifact list
       run: |
