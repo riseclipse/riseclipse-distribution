@@ -27,10 +27,12 @@ name: Build and deploy snapshot rcp products
 on: workflow_dispatch
 
 jobs:
-  build:
-    # Runs on macOS to build dmg
-    runs-on: macos-15
+  build-products:
+    # Use a specific version to avoid unattended changes with latest
+    runs-on: ubuntu-24.04
     name: Build rcp products
+    outputs:
+      artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
 
     steps:
     - name: Checkout ${{ github.event.repository.name }}
@@ -59,7 +61,7 @@ jobs:
         cd riseclipse-developer
         mvn --batch-mode install -Pdeploy-snapshots
 
-    # RiseClipse plugins are not found when building rcp products event if they are
+    # RiseClipse plugins are not found when building rcp products even if they are
     # available on https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/io/github/riseclipse/
     # It's OK when building update-site, but not for rcp ??
     # So we install plugins on the runner
@@ -117,27 +119,76 @@ jobs:
         cd ${{ github.event.repository.name }}
         mvn --batch-mode verify -Pdeploy-snapshots
     
+    - name: upload products
+      uses: actions/upload-artifact@v4
+      id: artifact-upload-step
+      with:
+        path: riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/(*.tar.gz|*.zip)
+        compression-level: 0
+        overwrite: true
+    
+  build-dmg:
+    # Runs on macOS to build dmg
+    runs-on: macos-15
+    name: Build dmg
+    needs: build-products
+    outputs:
+      artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
+
+    steps:
+    - name: download products
+      env:
+        ARTIFACT_ID: ${{ needs.build-products.outputs.artifact-id }}
+      uses: actions/download-artifact@v4
+      with:
+        artifact-id: $ARTIFACT_ID
+    
+    - name: untar macos products
+      run: |
+        ls -l
+        mkdir x86_64
+        tar -C x86_64 zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
+        rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
+        mkdir aarch64
+        tar -C aarch64 zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
+        rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
+        ls -l
+
     - name: Build macOS x86_64 dmg
       uses: L-Super/create-dmg-actions@v1.0.3
       with:
-        dmg_name: 'RiseClipse_IEC61850_Application_\(x86_64\)'
-        src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse_IEC61850_Application.app'
-#       run: |
-#         genisoimage -D -V 'RiseClipse IEC61850 Application (x86_64)' -no-pad -r -apple -o 'RiseClipse IEC61850 Application (x86_64).dmg' 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse IEC61850 Application.app'
+        dmg_name: 'RiseClipse_IEC61850_Application_x86_64'
+        src_dir: 'x86_64/RiseClipse_IEC61850_Application.app'
 
     - name: Build macOS aarch64 dmg
       uses: L-Super/create-dmg-actions@v1.0.3
       with:
-        dmg_name: 'RiseClipse_IEC61850_Application_\(aarch64\)'
-        src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/aarch64/RiseClipse_IEC61850_Application.app'
-#       run: |
-#         genisoimage -D -V 'RiseClipse IEC61850 Application (aarch64)' -no-pad -r -apple -o 'RiseClipse IEC61850 Application (aarch64).dmg' 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/aarch64/RiseClipse IEC61850 Application.app'
+        dmg_name: 'RiseClipse_IEC61850_Application_aarch64'
+        src_dir: 'aarch64/RiseClipse_IEC61850_Application.app'
+    
+    - name: upload dmg
+      uses: actions/upload-artifact@v4
+      id: artifact-upload-step
+      with:
+        path: (*.tar.gz|*.zip|*.dmg)
+        compression-level: 0
 
+  deploy-rcp:
+    # Use a specific version to avoid unattended changes with latest
+    runs-on: ubuntu-24.04
+    name: Deploy rcp products
+    needs: build-dmg
+
+    steps:
+    - name: download products
+      env:
+        ARTIFACT_ID: ${{ needs.build-dmg.outputs.artifact-id }}
+      uses: actions/download-artifact@v4
+      with:
+        artifact-id: $ARTIFACT_ID
+    
     - name: Get artifact list
       run: |
-        mv riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*linux*.tar.gz .
-        mv riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*.zip .
-        ls -l
         ARTIFACT_LIST="$(ls -m *.tar.gz *.zip *.dmg | tr -d '\n')"
         echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
         ARTIFACT_LIST="$(ls -1 *.tar.gz *.zip *.dmg)"
