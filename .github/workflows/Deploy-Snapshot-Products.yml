@@ -149,14 +149,12 @@ jobs:
     
     - name: untar macos products
       run: |
-        ls -l *
         mkdir x86_64
         tar -C x86_64 -zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
         rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
         mkdir aarch64
         tar -C aarch64 -zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
         rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
-        ls -l *
 
     - name: Build macOS x86_64 dmg
       uses: L-Super/create-dmg-actions@v1.0.3
@@ -210,9 +208,12 @@ jobs:
         echo '<ul>'                                          >> /tmp/message.html
         for ARTIFACT in ${ARTIFACT_LIST}
         do
-          echo '<li><a href="https://rise-clipse.pam-retd.fr/front_v2/develop/${ARTIFACT}">${ARTIFACT}</a></li>' >> /tmp/message.html
+          echo '<li><a href="https://rise-clipse.pam-retd.fr/front_v2/develop/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
         done
         echo '</ul>'                                         >> /tmp/message.html
+        echo '<p></p>'                                       >> /tmp/message.html
+        echo '<p>----</p>'                                   >> /tmp/message.html
+        echo '<p>The RiseClipse team</p>'                    >> /tmp/message.html
         echo '</body>'                                       >> /tmp/message.html
         echo '</html>'                                       >> /tmp/message.html
       id: artifacts_metadata
@@ -241,9 +242,9 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{ secrets.RISECLIPSE_GMAIL_PASSWORD }}
         # Required mail subject:
-        subject: New development version of "RiseClipse 61850 Application"
+        subject: New development version of "RiseClipse IEC61850 Application"
         # Required recipients' addresses:
-        to: dominique.marcadet@centralesupelec.fr
+        to: dominique.marcadet@centralesupelec.fr, aurelie.dehouck-neveu@edf.fr
         # Required sender full name (address can be skipped):
         from: riseclipse@gmail.com
         # Optional HTML body read from file:
