@@ -202,8 +202,9 @@ jobs:
       id: dmg-upload-step
       with:
         name: macos-dmg
-        path: *.dmg
+        path: ./*.dmg
         compression-level: 0
+        overwrite: true
 
   deploy-rcp:
     # Use a specific version to avoid unattended changes with latest
