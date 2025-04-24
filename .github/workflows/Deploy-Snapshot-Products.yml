@@ -32,7 +32,8 @@ jobs:
     runs-on: ubuntu-24.04
     name: Build rcp products
     outputs:
-      artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
+      macos-id: ${{ steps.macos-upload-step.outputs.artifact-id }}
+      other-id: ${{ steps.other-upload-step.outputs.artifact-id }}
 
     steps:
     - name: Checkout ${{ github.event.repository.name }}
@@ -119,11 +120,41 @@ jobs:
         cd ${{ github.event.repository.name }}
         mvn --batch-mode verify -Pdeploy-snapshots
     
-    - name: upload products
+    - name: display products
+      run: |
+        echo '----'
+        ls -l riseclipse-distribution
+        echo '----'
+        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product
+        echo '----'
+        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target
+        echo '----'
+        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/
+        echo '----'
+        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*macosx*
+        echo '----'
+        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*linux*
+        echo '----'
+        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*win32*
+        echo '----'
+    
+    - name: upload macos products
       uses: actions/upload-artifact@v4
-      id: artifact-upload-step
+      id: macos-upload-step
       with:
-        path: riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/(*.tar.gz|*.zip)
+        name: macos-artifacts
+        path: riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*macosx*
+        compression-level: 0
+        overwrite: true
+    
+    - name: upload other products
+      uses: actions/upload-artifact@v4
+      id: other-upload-step
+      with:
+        name: other-artifacts
+        path: |
+          riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*linux*
+          riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*win32*
         compression-level: 0
         overwrite: true
     
@@ -133,7 +164,7 @@ jobs:
     name: Build dmg
     needs: build-products
     outputs:
-      artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
+      artifact-id: ${{ steps.macos-upload-step.outputs.artifact-id }}
 
     steps:
     - name: download products
@@ -170,17 +201,25 @@ jobs:
       uses: actions/upload-artifact@v4
       id: artifact-upload-step
       with:
-        path: (*.tar.gz|*.zip|*.dmg)
+        name: macos-dmg
+        path: *.dmg
         compression-level: 0
 
   deploy-rcp:
     # Use a specific version to avoid unattended changes with latest
     runs-on: ubuntu-24.04
     name: Deploy rcp products
-    needs: build-dmg
+    needs: [build-products, build-dmg]
 
     steps:
-    - name: download products
+    - name: download other products
+      env:
+        ARTIFACT_ID: ${{ needs.build-products.outputs.artifact-id }}
+      uses: actions/download-artifact@v4
+      with:
+        artifact-id: $ARTIFACT_ID
+    
+    - name: download macos products
       env:
         ARTIFACT_ID: ${{ needs.build-dmg.outputs.artifact-id }}
       uses: actions/download-artifact@v4
