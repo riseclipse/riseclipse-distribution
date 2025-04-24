@@ -31,9 +31,6 @@ jobs:
     # Use a specific version to avoid unattended changes with latest
     runs-on: ubuntu-24.04
     name: Build rcp products
-    outputs:
-      macos-id: ${{ steps.macos-upload-step.outputs.artifact-id }}
-      other-id: ${{ steps.other-upload-step.outputs.artifact-id }}
 
     steps:
     - name: Checkout ${{ github.event.repository.name }}
@@ -120,27 +117,8 @@ jobs:
         cd ${{ github.event.repository.name }}
         mvn --batch-mode verify -Pdeploy-snapshots
     
-    - name: display products
-      run: |
-        echo '----'
-        ls -l riseclipse-distribution
-        echo '----'
-        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product
-        echo '----'
-        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target
-        echo '----'
-        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/
-        echo '----'
-        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*macosx*
-        echo '----'
-        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*linux*
-        echo '----'
-        ls -l riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*win32*
-        echo '----'
-    
     - name: upload macos products
       uses: actions/upload-artifact@v4
-      id: macos-upload-step
       with:
         name: macos-artifacts
         path: riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*macosx*
@@ -149,7 +127,6 @@ jobs:
     
     - name: upload other products
       uses: actions/upload-artifact@v4
-      id: other-upload-step
       with:
         name: other-artifacts
         path: |
@@ -163,26 +140,22 @@ jobs:
     runs-on: macos-15
     name: Build dmg
     needs: build-products
-    outputs:
-      dmg-id: ${{ steps.dmg-upload-step.outputs.artifact-id }}
 
     steps:
     - name: download products
-      env:
-        MACOS_ID: ${{ needs.build-products.outputs.macos-id }}
       uses: actions/download-artifact@v4
       with:
-        artifact-ids: $MACOS_ID
+        name: macos-artifacts
     
     - name: untar macos products
       run: |
         ls -l *
         mkdir x86_64
-        tar -C x86_64 -zxf macos-artifacts/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
-        rm macos-artifacts/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
+        tar -C x86_64 -zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
+        rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
         mkdir aarch64
-        tar -C aarch64 -zxf macos-artifacts/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
-        rm macos-artifacts/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
+        tar -C aarch64 -zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
+        rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
         ls -l *
 
     - name: Build macOS x86_64 dmg
@@ -199,7 +172,6 @@ jobs:
     
     - name: upload dmg
       uses: actions/upload-artifact@v4
-      id: dmg-upload-step
       with:
         name: macos-dmg
         path: ./*.dmg
@@ -215,18 +187,14 @@ jobs:
     steps:
 
     - name: download macos products
-      env:
-        DMG_ID: ${{ needs.build-dmg.outputs.dmg-id }}
       uses: actions/download-artifact@v4
       with:
-        artifact-ids: $DMG_ID
+        name: macos-dmg
     
     - name: download other products
-      env:
-        OTHER_ID: ${{ needs.build-products.outputs.other-id }}
       uses: actions/download-artifact@v4
       with:
-        artifact-ids: $OTHER_ID
+        name: other-artifacts
     
     - name: Get artifact list
       run: |
