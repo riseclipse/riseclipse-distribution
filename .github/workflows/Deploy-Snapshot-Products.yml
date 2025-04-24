@@ -176,14 +176,14 @@ jobs:
     
     - name: untar macos products
       run: |
-        ls -l
+        ls -l *
         mkdir x86_64
-        tar -C x86_64 zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
-        rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
+        tar -C x86_64 -zxf macos-artifacts/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
+        rm macos-artifacts/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
         mkdir aarch64
-        tar -C aarch64 zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
-        rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
-        ls -l
+        tar -C aarch64 -zxf macos-artifacts/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
+        rm macos-artifacts/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
+        ls -l *
 
     - name: Build macOS x86_64 dmg
       uses: L-Super/create-dmg-actions@v1.0.3
