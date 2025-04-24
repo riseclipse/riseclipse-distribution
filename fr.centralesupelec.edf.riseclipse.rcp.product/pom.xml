@@ -41,7 +41,7 @@
 
   <properties>
     <product-id>fr.centralesupelec.edf.riseclipse.iec61850.rcp.product</product-id>
-    <product-name>RiseClipse IEC61850 Application</product-name>
+    <product-name>RiseClipse_IEC61850_Application</product-name>
   </properties>
 
   <build>

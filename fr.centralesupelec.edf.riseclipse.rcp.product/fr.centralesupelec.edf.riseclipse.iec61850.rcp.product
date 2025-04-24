@@ -21,7 +21,7 @@
 **      https://riseclipse.github.io
 *************************************************************************
 -->
-<product name="RiseClipse IEC61850 Application" uid="fr.centralesupelec.edf.riseclipse.iec61850.rcp.product" id="org.eclipse.platform.ide" application="org.eclipse.ui.ide.workbench" version="1.2.0.qualifier" type="features" includeLaunchers="true" autoIncludeRequirements="true">
+<product name="RiseClipse_IEC61850_Application" uid="fr.centralesupelec.edf.riseclipse.iec61850.rcp.product" id="org.eclipse.platform.ide" application="org.eclipse.ui.ide.workbench" version="1.2.0.qualifier" type="features" includeLaunchers="true" autoIncludeRequirements="true">
 
    <aboutInfo>
       <image path="/fr.centralesupelec.edf.riseclipse.rcp/icons/riseclipse_lg.png"/>

@@ -117,31 +117,19 @@ jobs:
         cd ${{ github.event.repository.name }}
         mvn --batch-mode verify -Pdeploy-snapshots
     
-    - name: Debug
-      run: |
-        ls -l 'riseclipse-distribution'
-        ls -l 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product'
-        ls -l 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target'
-        ls -l 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products'
-        ls -l 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product'
-        ls -l 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx'
-        ls -l 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa'
-        ls -l 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64'
-        ls -l 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse IEC61850 Application.app'
-    
     - name: Build macOS x86_64 dmg
       uses: L-Super/create-dmg-actions@v1.0.3
       with:
-        dmg_name: 'RiseClipse\ IEC61850\ Application\ \(x86_64\)'
-        src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse IEC61850 Application.app'
+        dmg_name: 'RiseClipse_IEC61850_Application\ \(x86_64\)'
+        src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse_IEC61850_Application.app'
 #       run: |
 #         genisoimage -D -V 'RiseClipse IEC61850 Application (x86_64)' -no-pad -r -apple -o 'RiseClipse IEC61850 Application (x86_64).dmg' 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/x86_64/RiseClipse IEC61850 Application.app'
 
     - name: Build macOS aarch64 dmg
       uses: L-Super/create-dmg-actions@v1.0.3
       with:
-        dmg_name: 'RiseClipse\ IEC61850\ Application\ \(aarch64\)'
-        src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/aarch64/RiseClipse IEC61850 Application.app'
+        dmg_name: 'RiseClipse_IEC61850_Application\ \(aarch64\)'
+        src_dir: 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/aarch64/RiseClipse_IEC61850_Application.app'
 #       run: |
 #         genisoimage -D -V 'RiseClipse IEC61850 Application (aarch64)' -no-pad -r -apple -o 'RiseClipse IEC61850 Application (aarch64).dmg' 'riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/fr.centralesupelec.edf.riseclipse.iec61850.rcp.product/macosx/cocoa/aarch64/RiseClipse IEC61850 Application.app'
 
@@ -153,20 +141,20 @@ jobs:
         ARTIFACT_LIST="$(ls -m *.tar.gz *.zip *.dmg | tr -d '\n')"
         echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
         ARTIFACT_LIST="$(ls -1 *.tar.gz *.zip *.dmg)"
-        echo '<html>'                                        > /tmp/message.html
-        echo '<head>'                                       >> /tmp/message.html
-        echo '<meta charset="utf-8">'                       >> /tmp/message.html
-        echo '</head>'                                      >> /tmp/message.html
-        echo '<body>'                                       >> /tmp/message.html
+        echo '<html>'                                         > /tmp/message.html
+        echo '<head>'                                        >> /tmp/message.html
+        echo '<meta charset="utf-8">'                        >> /tmp/message.html
+        echo '</head>'                                       >> /tmp/message.html
+        echo '<body>'                                        >> /tmp/message.html
         echo '<p>The following downloads are available:</p>' >> /tmp/message.html
-        echo '<ul>'                                         >> /tmp/message.html
+        echo '<ul>'                                          >> /tmp/message.html
         for ARTIFACT in ${ARTIFACT_LIST}
         do
           echo '<li><a href="https://rise-clipse.pam-retd.fr/front_v2/develop/${ARTIFACT}">${ARTIFACT}</a></li>' >> /tmp/message.html
         done
-        echo '</ul>'                                        >> /tmp/message.html
-        echo '</body>'                                      >> /tmp/message.html
-        echo '</html>'                                      >> /tmp/message.html
+        echo '</ul>'                                         >> /tmp/message.html
+        echo '</body>'                                       >> /tmp/message.html
+        echo '</html>'                                       >> /tmp/message.html
       id: artifacts_metadata
 
     - name: Copy artifacts
