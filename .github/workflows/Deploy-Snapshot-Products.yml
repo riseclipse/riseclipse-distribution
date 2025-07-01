@@ -37,7 +37,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         path: ${{ github.event.repository.name }}
-        ref: develop
+        ref: old_working
         fetch-depth: 0
 
     - name: Setup Java
