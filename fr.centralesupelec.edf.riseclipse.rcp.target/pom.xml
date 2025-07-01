@@ -29,14 +29,14 @@
  
   <groupId>io.github.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.rcp.target</artifactId>
-  <version>1.2.0-SNAPSHOT</version>
+  <version>1.2.1</version>
   <packaging>eclipse-target-definition</packaging>
   <name>[target] RiseClipse RCP Target Definition</name>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
     <artifactId>riseclipse-distribution</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.2.1</version>
   </parent>
 
 </project>

@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: fr.centralesupelec.edf.riseclipse.rcp
 Bundle-SymbolicName: fr.centralesupelec.edf.riseclipse.rcp;singleton:=true
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 1.2.1
 Automatic-Module-Name: fr.centralesupelec.edf.riseclipse.rcp

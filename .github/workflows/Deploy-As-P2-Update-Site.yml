@@ -35,7 +35,7 @@ jobs:
     - name: Build with Maven
       run: |
         cd ${{ github.event.repository.name }}
-        mvn --batch-mode verify
+        mvn --file pom_update_site.xml --batch-mode verify
 
     - name: Upload flat p2 update site
       if: github.ref == 'refs/heads/master'

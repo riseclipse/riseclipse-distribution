@@ -29,14 +29,14 @@
  
   <groupId>io.github.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.cim.cgmes-3.feature</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.2</version>
   <packaging>eclipse-feature</packaging>
   <name>[feature] RiseClipse Metamodel CGMES 3.0.0</name>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
     <artifactId>riseclipse-distribution</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.2.1</version>
   </parent>
 
   <!-- RiseClipse plugins needed -->
@@ -45,43 +45,43 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
-      <version>1.2.13-SNAPSHOT</version>
+      <version>1.2.12</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.headerModel</artifactId>
-      <version>1.2.3-SNAPSHOT</version>
+      <version>1.2.2</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.headerModel.edit</artifactId>
-      <version>1.2.3-SNAPSHOT</version>
+      <version>1.2.2</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.util</artifactId>
-      <version>1.2.3-SNAPSHOT</version>
+      <version>1.2.2</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.cgmes-v3.0.0</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
+      <version>1.0.2</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.cgmes-v3.0.0.edit</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
+      <version>1.0.2</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.cim.cgmes-v3.0.0.utilities</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
+      <version>1.0.2</version>
     </dependency>
     
   </dependencies>
