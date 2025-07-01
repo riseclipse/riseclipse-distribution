@@ -31,12 +31,12 @@
   <artifactId>fr.centralesupelec.edf.riseclipse.cim.cgmes-3.feature</artifactId>
   <version>1.0.2</version>
   <packaging>eclipse-feature</packaging>
+  <name>[feature] RiseClipse Metamodel CGMES 3.0.0</name>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
-    <artifactId>riseclipse-metamodel-cgmes-3-0-0</artifactId>
-    <version>1.0.2</version>
-    <relativePath>../riseclipse-metamodel-cgmes-3-0-0/pom.xml</relativePath>
+    <artifactId>riseclipse-distribution</artifactId>
+    <version>1.2.1</version>
   </parent>
 
   <!-- RiseClipse plugins needed -->
@@ -45,7 +45,7 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
-      <version>1.2.11</version>
+      <version>1.2.12</version>
     </dependency>
     
     <dependency>

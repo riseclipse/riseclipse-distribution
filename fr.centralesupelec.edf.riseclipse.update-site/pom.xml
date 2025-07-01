@@ -29,13 +29,14 @@
  
   <groupId>io.github.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.update-site</artifactId>
-  <version>1.2.0-SNAPSHOT</version>
+  <version>1.2.1</version>
   <packaging>eclipse-repository</packaging>
+  <name>[eclipse] RiseClipse Update Site</name>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
     <artifactId>riseclipse-distribution</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.2.1</version>
   </parent>
 
   <profiles>
@@ -89,19 +90,19 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.editor.feature</artifactId>
-      <version>1.2.0</version>
+      <version>1.2.2</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</artifactId>
-      <version>1.2.13</version>
+      <version>1.2.15</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</artifactId>
-      <version>1.2.11</version>
+      <version>1.2.12</version>
     </dependency>
     
     <dependency>

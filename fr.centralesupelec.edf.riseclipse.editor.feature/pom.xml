@@ -29,14 +29,14 @@
  
   <groupId>io.github.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.editor.feature</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.2</version>
   <packaging>eclipse-feature</packaging>
+  <name>[feature] RiseClipse Application - Editor</name>
   
   <parent>
     <groupId>io.github.riseclipse</groupId>
-    <artifactId>riseclipse-editor</artifactId>
-    <version>1.2.0</version>
-    <relativePath>../riseclipse-editor/pom.xml</relativePath>
+    <artifactId>riseclipse-distribution</artifactId>
+    <version>1.2.1</version>
   </parent>
 
   <build>
@@ -58,13 +58,13 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.editor</artifactId>
-      <version>1.2.0</version>
+      <version>1.2.2</version>
     </dependency>
 
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
-      <version>1.2.11</version>
+      <version>1.2.12</version>
     </dependency>
   </dependencies>
 

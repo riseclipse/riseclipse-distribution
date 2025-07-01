@@ -17,17 +17,236 @@
 # **      https://riseclipse.github.io
 # *************************************************************************
 
-name: Do nothing
+name: Build and deploy snapshot rcp products
+
+# This CI workflow builds development versions of RiseClipse RCP Applications.
+# It uses snapshot components from OSSRH Nexus snapshot repository
+# Development versions are uploaded to RiseClipseWeb
+# It send email about these new development versions
 
 on: workflow_dispatch
 
 jobs:
-  build:
+  build-products:
     # Use a specific version to avoid unattended changes with latest
     runs-on: ubuntu-24.04
-    name: do nothing for now
+    name: Build rcp products
 
     steps:
-    - name: say hello
+    - name: Checkout ${{ github.event.repository.name }}
+      uses: actions/checkout@v4
+      with:
+        path: ${{ github.event.repository.name }}
+        ref: develop
+        fetch-depth: 0
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+        cache: 'maven'
+
+    - name: Checkout riseclipse-developper
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-developer
+        path: riseclipse-developer
+        ref: develop
+
+    - name: Install root pom of develop branch
       run: |
-        echo "hello"
+        cd riseclipse-developer
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    # RiseClipse plugins are not found when building rcp products even if they are
+    # available on https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/io/github/riseclipse/
+    # It's OK when building update-site, but not for rcp ??
+    # So we install plugins on the runner
+    
+    - name: Checkout riseclipse-main
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-main
+        path: riseclipse-main
+        ref: develop
+
+    - name: Install main plugin
+      run: |
+        cd riseclipse-main
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    - name: Checkout riseclipse-editor
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-editor
+        path: riseclipse-editor
+        ref: develop
+
+    - name: Install editor plugin
+      run: |
+        cd riseclipse-editor
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    - name: Checkout riseclipse-metamodel-scl2003
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-metamodel-scl2003
+        path: riseclipse-metamodel-scl2003
+        ref: develop
+
+    - name: Install metamodel-scl2003 plugin
+      run: |
+        cd riseclipse-metamodel-scl2003
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    - name: Checkout riseclipse-metamodel-nsd2016
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-metamodel-nsd2016
+        path: riseclipse-metamodel-nsd2016
+        ref: develop
+
+    - name: Install metamodel-nsd2016 plugin
+      run: |
+        cd riseclipse-metamodel-nsd2016
+        mvn --batch-mode install -Pdeploy-snapshots
+
+    - name: Build rcp
+      run: |
+        cd ${{ github.event.repository.name }}
+        mvn --file pom_rcp.xml --batch-mode verify -Pdeploy-snapshots
+    
+    - name: upload macos products
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos-artifacts
+        path: riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*macosx*
+        compression-level: 0
+        overwrite: true
+    
+    - name: upload other products
+      uses: actions/upload-artifact@v4
+      with:
+        name: other-artifacts
+        path: |
+          riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*linux*
+          riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*win32*
+        compression-level: 0
+        overwrite: true
+    
+  build-dmg:
+    # Runs on macOS to build dmg
+    runs-on: macos-15
+    name: Build dmg
+    needs: build-products
+
+    steps:
+    - name: download products
+      uses: actions/download-artifact@v4
+      with:
+        name: macos-artifacts
+    
+    - name: untar macos products
+      run: |
+        mkdir x86_64
+        tar -C x86_64 -zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
+        rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.x86_64.tar.gz
+        mkdir aarch64
+        tar -C aarch64 -zxf fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
+        rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
+
+    - name: Build macOS x86_64 dmg
+      uses: L-Super/create-dmg-actions@v1.0.3
+      with:
+        dmg_name: 'RiseClipse_IEC61850_Application_x86_64'
+        src_dir: 'x86_64/RiseClipse_IEC61850_Application.app'
+
+    - name: Build macOS aarch64 dmg
+      uses: L-Super/create-dmg-actions@v1.0.3
+      with:
+        dmg_name: 'RiseClipse_IEC61850_Application_aarch64'
+        src_dir: 'aarch64/RiseClipse_IEC61850_Application.app'
+    
+    - name: upload dmg
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos-dmg
+        path: ./*.dmg
+        compression-level: 0
+        overwrite: true
+
+  deploy-rcp:
+    # Use a specific version to avoid unattended changes with latest
+    runs-on: ubuntu-24.04
+    name: Deploy rcp products
+    needs: [build-products, build-dmg]
+
+    steps:
+
+    - name: download macos products
+      uses: actions/download-artifact@v4
+      with:
+        name: macos-dmg
+    
+    - name: download other products
+      uses: actions/download-artifact@v4
+      with:
+        name: other-artifacts
+    
+    - name: Get artifact list
+      run: |
+        ARTIFACT_LIST="$(ls -m *.tar.gz *.zip *.dmg | tr -d '\n')"
+        echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
+        ARTIFACT_LIST="$(ls -1 *.tar.gz *.zip *.dmg)"
+        echo '<html>'                                         > /tmp/message.html
+        echo '<head>'                                        >> /tmp/message.html
+        echo '<meta charset="utf-8">'                        >> /tmp/message.html
+        echo '</head>'                                       >> /tmp/message.html
+        echo '<body>'                                        >> /tmp/message.html
+        echo '<p>The following downloads are available:</p>' >> /tmp/message.html
+        echo '<ul>'                                          >> /tmp/message.html
+        for ARTIFACT in ${ARTIFACT_LIST}
+        do
+          echo '<li><a href="https://rise-clipse.pam-retd.fr/front_v2/develop/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
+        done
+        echo '</ul>'                                         >> /tmp/message.html
+        echo '<p></p>'                                       >> /tmp/message.html
+        echo '<p>----</p>'                                   >> /tmp/message.html
+        echo '<p>The RiseClipse team</p>'                    >> /tmp/message.html
+        echo '</body>'                                       >> /tmp/message.html
+        echo '</html>'                                       >> /tmp/message.html
+      id: artifacts_metadata
+
+    - name: Copy artifacts
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.RISECLIPSE_WEB_HOSTNAME }}
+        username: ${{ secrets.RISECLIPSE_WEB_USERNAME }}
+        key: ${{ secrets.RISECLIPSE_WEB_SSHKEY }}
+        passphrase: ${{ secrets.RISECLIPSE_WEB_PASSPHRASE }}
+        source: "${{ steps.artifacts_metadata.outputs.artifact_list }}"
+        target: develop
+        overwrite: true
+
+    - name: Send email about this new development version
+      uses: dawidd6/action-send-mail@v4
+      with:
+        server_address: smtp.gmail.com
+        # Server port, default 25:
+        server_port: 465
+        # Optional whether this connection use TLS (default is true if server_port is 465)
+        secure: true
+        # Optional (recommended) mail server username:
+        username: ${{ secrets.RISECLIPSE_GMAIL_USERNAME }}
+        # Optional (recommended) mail server password:
+        password: ${{ secrets.RISECLIPSE_GMAIL_PASSWORD }}
+        # Required mail subject:
+        subject: New development version of "RiseClipse IEC61850 Application"
+        # Required recipients' addresses:
+        to: dominique.marcadet@centralesupelec.fr, aurelie.dehouck-neveu@edf.fr
+        # Required sender full name (address can be skipped):
+        from: riseclipse@gmail.com
+        # Optional HTML body read from file:
+        html_body: file:///tmp/message.html
+
