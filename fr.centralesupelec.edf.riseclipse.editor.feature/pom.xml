@@ -29,7 +29,7 @@
  
   <groupId>io.github.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.editor.feature</artifactId>
-  <version>1.2.1-SNAPSHOT</version>
+  <version>1.2.3-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
   <name>[feature] RiseClipse Application - Editor</name>
   
@@ -58,7 +58,7 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.editor</artifactId>
-      <version>1.2.1-SNAPSHOT</version>
+      <version>1.2.3-SNAPSHOT</version>
     </dependency>
 
     <dependency>
