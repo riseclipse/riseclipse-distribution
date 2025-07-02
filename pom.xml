@@ -99,7 +99,7 @@
                   <artifact>
                     <groupId>io.github.riseclipse</groupId>
                     <artifactId>fr.centralesupelec.edf.riseclipse.rcp.target</artifactId>
-                    <version>1.2.0</version>
+                    <version>1.2.1</version>
                   </artifact>
                 </target>
               </configuration>
