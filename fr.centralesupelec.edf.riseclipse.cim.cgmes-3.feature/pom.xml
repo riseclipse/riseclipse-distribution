@@ -36,7 +36,7 @@
   <parent>
     <groupId>io.github.riseclipse</groupId>
     <artifactId>riseclipse-distribution</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2-SNAPSHOT</version>
   </parent>
 
   <!-- RiseClipse plugins needed -->
@@ -45,7 +45,7 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
-      <version>1.2.12</version>
+      <version>1.2.13-SNAPSHOT</version>
     </dependency>
     
     <dependency>
