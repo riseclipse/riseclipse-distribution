@@ -17,12 +17,11 @@
 # **      https://riseclipse.github.io
 # *************************************************************************
 
-name: Build and deploy snapshot rcp products
+name: Build and deploy rcp products
 
-# This CI workflow builds development versions of RiseClipse RCP Applications.
-# It uses snapshot components from OSSRH Nexus snapshot repository
-# Development versions are uploaded to RiseClipseWeb
-# It send email about these new development versions
+# This CI workflow builds release versions of RiseClipse RCP Applications.
+# Versions are uploaded to RiseClipseWeb
+# It send email about these new versions
 
 on: workflow_dispatch
 
@@ -37,7 +36,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         path: ${{ github.event.repository.name }}
-        ref: develop
         fetch-depth: 0
 
     - name: Setup Java
@@ -52,12 +50,11 @@ jobs:
       with:
         repository: riseclipse/riseclipse-developer
         path: riseclipse-developer
-        ref: develop
 
-    - name: Install root pom of develop branch
+    - name: Install root pom
       run: |
         cd riseclipse-developer
-        mvn --batch-mode install -Pdeploy-snapshots
+        mvn --batch-mode install
 
     # RiseClipse plugins are not found when building rcp products even if they are
     # available on https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/io/github/riseclipse/
@@ -69,53 +66,49 @@ jobs:
       with:
         repository: riseclipse/riseclipse-main
         path: riseclipse-main
-        ref: develop
 
     - name: Install main plugin
       run: |
         cd riseclipse-main
-        mvn --batch-mode install -Pdeploy-snapshots
+        mvn --batch-mode install
 
     - name: Checkout riseclipse-editor
       uses: actions/checkout@v4
       with:
         repository: riseclipse/riseclipse-editor
         path: riseclipse-editor
-        ref: develop
 
     - name: Install editor plugin
       run: |
         cd riseclipse-editor
-        mvn --batch-mode install -Pdeploy-snapshots
+        mvn --batch-mode install
 
     - name: Checkout riseclipse-metamodel-scl2003
       uses: actions/checkout@v4
       with:
         repository: riseclipse/riseclipse-metamodel-scl2003
         path: riseclipse-metamodel-scl2003
-        ref: develop
 
     - name: Install metamodel-scl2003 plugin
       run: |
         cd riseclipse-metamodel-scl2003
-        mvn --batch-mode install -Pdeploy-snapshots
+        mvn --batch-mode install
 
     - name: Checkout riseclipse-metamodel-nsd2016
       uses: actions/checkout@v4
       with:
         repository: riseclipse/riseclipse-metamodel-nsd2016
         path: riseclipse-metamodel-nsd2016
-        ref: develop
 
     - name: Install metamodel-nsd2016 plugin
       run: |
         cd riseclipse-metamodel-nsd2016
-        mvn --batch-mode install -Pdeploy-snapshots
+        mvn --batch-mode install
 
     - name: Build rcp
       run: |
         cd ${{ github.event.repository.name }}
-        mvn --batch-mode verify -Pdeploy-snapshots
+        mvn --batch-mode verify -Prcp
     
     - name: upload macos products
       uses: actions/upload-artifact@v4
@@ -208,7 +201,7 @@ jobs:
         echo '<ul>'                                          >> /tmp/message.html
         for ARTIFACT in ${ARTIFACT_LIST}
         do
-          echo '<li><a href="https://rise-clipse.pam-retd.fr/front_v2/develop/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
+          echo '<li><a href="https://rise-clipse.pam-retd.fr/front_v2/release/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
         done
         echo '</ul>'                                         >> /tmp/message.html
         echo '<p></p>'                                       >> /tmp/message.html
@@ -226,10 +219,10 @@ jobs:
         key: ${{ secrets.RISECLIPSE_WEB_SSHKEY }}
         passphrase: ${{ secrets.RISECLIPSE_WEB_PASSPHRASE }}
         source: "${{ steps.artifacts_metadata.outputs.artifact_list }}"
-        target: develop
+        target: release
         overwrite: true
 
-    - name: Send email about this new development version
+    - name: Send email about this new version
       uses: dawidd6/action-send-mail@v4
       with:
         server_address: smtp.gmail.com
@@ -242,9 +235,9 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{ secrets.RISECLIPSE_GMAIL_PASSWORD }}
         # Required mail subject:
-        subject: New development version of "RiseClipse IEC61850 Applications"
+        subject: New version of "RiseClipse IEC61850 Applications"
         # Required recipients' addresses:
-        to: dominique.marcadet@centralesupelec.fr, aurelie.dehouck-neveu@edf.fr
+        to: dominique.marcadet@centralesupelec.fr
         # Required sender full name (address can be skipped):
         from: riseclipse@gmail.com
         # Optional HTML body read from file:

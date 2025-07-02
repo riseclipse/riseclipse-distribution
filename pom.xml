@@ -45,5 +45,82 @@
     <url>https://github.com/riseclipse/riseclipse-distribution</url>
     <tag>HEAD</tag>
   </scm>
+  
+  <!--
+    Two artifacts are built:
+    - an Eclipse update site
+    - an RCP application (only for 61850)
+    Both need features.
+    To separate them, a try with different pom.xml files (a common one and two others) was
+    done, but the rcp built failed with an error about not founding justj!
+    Therefore, an alternate way was designed using profiles.
+   -->
+ 
+  <build>
+    <!-- Used for rcp, but error if in profile -->
+    <outputDirectory>bin</outputDirectory>
+  </build>
+    
+  <modules>
+    <module>fr.centralesupelec.edf.riseclipse.editor.feature</module>
+    <module>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</module>
+    <module>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</module>
+  </modules>
+  
+  <profiles>
+    <profile>
+      <id>update-site</id>
+ 
+      <modules>
+        <module>fr.centralesupelec.edf.riseclipse.cim.cgmes-3.feature</module>
+        <module>fr.centralesupelec.edf.riseclipse.update-site</module>
+      </modules>
+  
+    </profile>
+    
+    <profile>
+      <id>rcp</id>
+ 
+      <modules>
+        <module>fr.centralesupelec.edf.riseclipse.rcp</module>
+        <module>fr.centralesupelec.edf.riseclipse.rcp.target</module>
+        <module>fr.centralesupelec.edf.riseclipse.rcp.product</module>
+      </modules>
+  
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.eclipse.tycho</groupId>
+              <artifactId>target-platform-configuration</artifactId>
+              <version>${tycho-version}</version>
+              <configuration>
+                <target>
+                  <artifact>
+                    <groupId>io.github.riseclipse</groupId>
+                    <artifactId>fr.centralesupelec.edf.riseclipse.rcp.target</artifactId>
+                    <version>1.2.0</version>
+                  </artifact>
+                </target>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+    
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <version>${tycho-version}</version>
+            <configuration>
+              <resolveWithExecutionEnvironmentConstraints>false</resolveWithExecutionEnvironmentConstraints>        
+            </configuration>
+          </plugin>
+        </plugins>
+    
+      </build>
+ 
+    </profile>
+  </profiles>
 
 </project>
