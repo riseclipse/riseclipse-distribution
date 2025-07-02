@@ -237,7 +237,7 @@ jobs:
         # Required mail subject:
         subject: New version of "RiseClipse IEC61850 Applications"
         # Required recipients' addresses:
-        to: dominique.marcadet@centralesupelec.fr
+        to: dominique.marcadet@centralesupelec.fr, aurelie.dehouck-neveu@edf.fr
         # Required sender full name (address can be skipped):
         from: riseclipse@gmail.com
         # Optional HTML body read from file:
