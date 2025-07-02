@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+*************************************************************************
+**  Copyright (c) 2025 CentraleSupélec & EDF.
+**  All rights reserved. This program and the accompanying materials
+**  are made available under the terms of the Eclipse Public License v2.0
+**  which accompanies this distribution, and is available at
+**  https://www.eclipse.org/legal/epl-v20.html
+** 
+**  This file is part of the RiseClipse tool
+**  
+**  Contributors:
+**      Computer Science Department, CentraleSupélec
+**      EDF R&D
+**  Contacts:
+**      dominique.marcadet@centralesupelec.fr
+**      aurelie.dehouck-neveu@edf.fr
+**  Web site:
+**      https://riseclipse.github.io
+*************************************************************************
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>io.github.riseclipse</groupId>
+  <artifactId>riseclipse-distribution-rcp</artifactId>
+  <version>1.2.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>[aggregator] RiseClipse Distribution (RCP)</name>
+  
+  <parent>
+    <groupId>io.github.riseclipse</groupId>
+    <artifactId>riseclipse-distribution</artifactId>
+    <version>1.2.0-SNAPSHOT</version>
+    <relativePath>./pom.xml</relativePath>
+  </parent>
+
+  <build>
+    <outputDirectory>bin</outputDirectory>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>target-platform-configuration</artifactId>
+          <version>${tycho-version}</version>
+          <configuration>
+            <target>
+              <artifact>
+                <groupId>io.github.riseclipse</groupId>
+                <artifactId>fr.centralesupelec.edf.riseclipse.rcp.target</artifactId>
+                <version>1.2.0-SNAPSHOT</version>
+              </artifact>
+            </target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <resolveWithExecutionEnvironmentConstraints>false</resolveWithExecutionEnvironmentConstraints>        
+        </configuration>
+      </plugin>
+    </plugins>
+
+  </build>
+ 
+  <modules>
+    <module>fr.centralesupelec.edf.riseclipse.editor.feature</module>
+    <module>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</module>
+    <module>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</module>
+    <module>fr.centralesupelec.edf.riseclipse.rcp</module>
+    <module>fr.centralesupelec.edf.riseclipse.rcp.target</module>
+    <module>fr.centralesupelec.edf.riseclipse.rcp.product</module>
+  </modules>
+
+</project>
