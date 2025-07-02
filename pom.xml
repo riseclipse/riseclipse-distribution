@@ -46,4 +46,8 @@
     <tag>HEAD</tag>
   </scm>
  
+  <modules>
+    <module>fr.centralesupelec.edf.riseclipse.rcp.target</module>
+  </modules>
+
 </project>
