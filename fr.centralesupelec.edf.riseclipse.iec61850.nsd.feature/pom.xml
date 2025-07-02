@@ -29,7 +29,7 @@
  
   <groupId>io.github.riseclipse</groupId>
   <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.feature</artifactId>
-  <version>1.2.12-SNAPSHOT</version>
+  <version>1.2.13-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
   <name>[feature] RiseClipse Metamodel NSD2016</name>
   
@@ -45,25 +45,25 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
-      <version>1.2.12-SNAPSHOT</version>
+      <version>1.2.13-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd</artifactId>
-      <version>1.2.12-SNAPSHOT</version>
+      <version>1.2.13-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.edit</artifactId>
-      <version>1.2.12-SNAPSHOT</version>
+      <version>1.2.13-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.iec61850.nsd.utilities</artifactId>
-      <version>1.2.12-SNAPSHOT</version>
+      <version>1.2.13-SNAPSHOT</version>
     </dependency>
     
   </dependencies>
