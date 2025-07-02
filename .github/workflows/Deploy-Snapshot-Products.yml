@@ -115,7 +115,7 @@ jobs:
     - name: Build rcp
       run: |
         cd ${{ github.event.repository.name }}
-        mvn --file pom_rcp.xml --batch-mode verify -Pdeploy-snapshots
+        mvn --batch-mode verify -Pdeploy-snapshots
     
     - name: upload macos products
       uses: actions/upload-artifact@v4
