@@ -46,6 +46,10 @@
     <tag>HEAD</tag>
   </scm>
  
+  <build>
+    <outputDirectory>bin</outputDirectory>
+  </build>
+    
   <modules>
     <module>fr.centralesupelec.edf.riseclipse.editor.feature</module>
     <module>fr.centralesupelec.edf.riseclipse.iec61850.scl.feature</module>
@@ -73,8 +77,6 @@
       </modules>
   
       <build>
-        <outputDirectory>bin</outputDirectory>
-    
         <pluginManagement>
           <plugins>
             <plugin>
