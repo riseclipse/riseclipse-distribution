@@ -209,7 +209,6 @@ Java and all Java-based trademarks are trademarks of Oracle Corporation in the U
    </plugins>
 
    <features>
-      <feature id="org.eclipse.platform"/>
       <feature id="org.eclipse.equinox.p2.user.ui"/>
       <feature id="fr.centralesupelec.edf.riseclipse.editor.feature" installMode="root"/>
       <feature id="fr.centralesupelec.edf.riseclipse.iec61850.scl.feature" installMode="root"/>
@@ -223,13 +222,23 @@ Java and all Java-based trademarks are trademarks of Oracle Corporation in the U
       <feature id="org.eclipse.emf.edit.ui"/>
       <feature id="org.eclipse.emf.validation"/>
       <feature id="org.eclipse.emf.validation.ocl"/>
-      <feature id="org.eclipse.ocl"/>
-      <feature id="org.eclipse.ocl.edit"/>
-      <feature id="org.eclipse.ocl.examples.unified"/>
       <feature id="org.eclipse.ocl.tools"/>
-      <feature id="org.eclipse.ocl.ui"/>
-      <feature id="org.eclipse.ocl.unified.core"/>
-      <feature id="org.eclipse.ocl.unified.ui"/>
+      <feature id="org.eclipse.emf.mapping.ecore"/>
+      <feature id="org.eclipse.emf.codegen"/>
+      <feature id="org.eclipse.equinox.p2.core.feature"/>
+      <feature id="org.eclipse.emf.mapping.ui"/>
+      <feature id="org.eclipse.emf.mapping"/>
+      <feature id="org.eclipse.emf.codegen.ui"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature"/>
+      <feature id="org.eclipse.emf.databinding.edit"/>
+      <feature id="org.eclipse.emf.codegen.ecore"/>
+      <feature id="org.eclipse.emf.converter"/>
+      <feature id="org.eclipse.emf.codegen.ecore.ui"/>
+      <feature id="org.eclipse.emf.ecore.editor"/>
+      <feature id="org.eclipse.equinox.p2.rcp.feature"/>
+      <feature id="org.eclipse.emf.mapping.ecore.editor"/>
+      <feature id="org.eclipse.emf.databinding"/>
+      <feature id="org.eclipse.emf.ecore.edit"/>
    </features>
 
    <configurations>
@@ -239,7 +248,6 @@ Java and all Java-based trademarks are trademarks of Oracle Corporation in the U
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="4" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
-      <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
       <property name="osgi.bundles.defaultStartLevel" value="4" />
       <property name="org.eclipse.update.reconcile" value="false" />
       <property name="osgi.requiredJavaVersion" value="21" />
