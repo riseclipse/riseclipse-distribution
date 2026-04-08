@@ -58,13 +58,13 @@
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.editor</artifactId>
-      <version>1.2.3-SNAPSHOT</version>
+      <version>1.2.3</version>
     </dependency>
 
     <dependency>
       <groupId>io.github.riseclipse</groupId>
       <artifactId>fr.centralesupelec.edf.riseclipse.main</artifactId>
-      <version>1.2.13-SNAPSHOT</version>
+      <version>1.2.13</version>
     </dependency>
   </dependencies>
 
