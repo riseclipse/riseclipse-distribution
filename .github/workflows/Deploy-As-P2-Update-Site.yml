@@ -21,12 +21,12 @@ jobs:
 
     steps:
     - name: Checkout ${{ github.event.repository.name }}
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         path: ${{ github.event.repository.name }}
 
     - name: Setup Java
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
         java-version: '21'
