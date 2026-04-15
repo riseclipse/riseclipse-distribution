@@ -25,7 +25,7 @@
          uid="fr.centralesupelec.edf.riseclipse.iec61850.rcp.product"
          id="org.eclipse.platform.ide"
          application="org.eclipse.ui.ide.workbench"
-         version="1.3.0.qualifier"
+         version="1.3.1.qualifier"
          type="features"
          includeLaunchers="true"
          autoIncludeRequirements="true">
