@@ -40,6 +40,7 @@ jobs:
 
     - name: Get version from pom.xml
       run: |
+        cd ${{ github.event.repository.name }}
         VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
         echo "project_version=$VERSION" >> $GITHUB_OUTPUT
       id: get_version
@@ -51,6 +52,6 @@ jobs:
         artifacts: |
           ${{ github.event.repository.name }}/fr.centralesupelec.edf.riseclipse.update-site/target/flat-repository/*
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ github.event.repository.name }}-${{ steps.get_version.outputs.project_version }}
-        name: ${{ github.event.repository.name }} v${{ steps.get_version.outputs.project_version }}
+        tag: v${{ steps.get_version.outputs.project_version }}
+        name: "RiseClipse P2 Update Site v${{ steps.get_version.outputs.project_version }}"
 
