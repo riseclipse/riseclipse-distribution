@@ -18,6 +18,7 @@ jobs:
   build:
     # Use a specific version to avoid unattended changes with latest
     runs-on: ubuntu-24.04
+    name: Make an Eclipse p2 update site
 
     steps:
     - name: Checkout ${{ github.event.repository.name }}
@@ -35,16 +36,21 @@ jobs:
     - name: Build with Maven
       run: |
         cd ${{ github.event.repository.name }}
-        mvn --batch-mode verify
+        mvn --batch-mode -Pupdate-site verify
+
+    - name: Get version from pom.xml
+      run: |
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo "project_version=$VERSION" >> $GITHUB_OUTPUT
+      id: get_version
 
     - name: Upload flat p2 update site
-      if: github.ref == 'refs/heads/master'
-      uses: crowbarmaster/GH-Automatic-Releases@latest
+      uses: ncipollo/release-action@v1
       with:
-        repo_token: "${{secrets.GITHUB_TOKEN}}"
-        automatic_release_tag: "latest"
-        prerelease: false
-        title: "Latest releases"
-        files: |
+        allowUpdates: true
+        artifacts: |
           ${{ github.event.repository.name }}/fr.centralesupelec.edf.riseclipse.update-site/target/flat-repository/*
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.event.repository.name }}-${{ steps.get_version.outputs.project_version }}
+        name: ${{ github.event.repository.name }} v${{ steps.get_version.outputs.project_version }}
 
