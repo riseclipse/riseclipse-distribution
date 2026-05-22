@@ -32,6 +32,13 @@ jobs:
     name: Build rcp products
 
     steps:
+    - name: Setup Java
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+        cache: 'maven'
+
     - name: Checkout ${{ github.event.repository.name }}
       uses: actions/checkout@v6
       with:
@@ -46,13 +53,6 @@ jobs:
         VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
         echo "project_version=$VERSION" >> $GITHUB_OUTPUT
       id: get_version
-
-    - name: Setup Java
-      uses: actions/setup-java@v5
-      with:
-        distribution: 'temurin'
-        java-version: '21'
-        cache: 'maven'
 
     - name: Checkout riseclipse-developer
       uses: actions/checkout@v6
