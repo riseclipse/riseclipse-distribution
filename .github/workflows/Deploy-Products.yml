@@ -32,18 +32,18 @@ jobs:
     name: Build rcp products
 
     steps:
+    - name: Checkout ${{ github.event.repository.name }}
+      uses: actions/checkout@v6
+      with:
+        path: ${{ github.event.repository.name }}
+        fetch-depth: 0
+
     - name: Setup Java
       uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
         java-version: '21'
         cache: 'maven'
-
-    - name: Checkout ${{ github.event.repository.name }}
-      uses: actions/checkout@v6
-      with:
-        path: ${{ github.event.repository.name }}
-        fetch-depth: 0
 
     - name: Use released version and get version from pom.xml
       run: |
