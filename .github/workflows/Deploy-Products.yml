@@ -38,11 +38,14 @@ jobs:
         path: ${{ github.event.repository.name }}
         fetch-depth: 0
 
-    - name: Use released version
+    - name: Use released version and get version from pom.xml
       run: |
         cd ${{ github.event.repository.name }}
         git fetch --tags
         git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo "project_version=$VERSION" >> $GITHUB_OUTPUT
+      id: get_version
 
     - name: Setup Java
       uses: actions/setup-java@v5
@@ -71,7 +74,7 @@ jobs:
     # The latest tag of each component should is used for building
     
     - name: Checkout riseclipse-main
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: riseclipse/riseclipse-main
         path: riseclipse-main
@@ -84,7 +87,7 @@ jobs:
         mvn --batch-mode install
 
     - name: Checkout riseclipse-editor
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: riseclipse/riseclipse-editor
         path: riseclipse-editor
@@ -97,7 +100,7 @@ jobs:
         mvn --batch-mode install
 
     - name: Checkout riseclipse-metamodel-scl2003
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: riseclipse/riseclipse-metamodel-scl2003
         path: riseclipse-metamodel-scl2003
@@ -110,7 +113,7 @@ jobs:
         mvn --batch-mode install
 
     - name: Checkout riseclipse-metamodel-nsd2016
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: riseclipse/riseclipse-metamodel-nsd2016
         path: riseclipse-metamodel-nsd2016
@@ -128,7 +131,7 @@ jobs:
         mvn --batch-mode verify -Prcp
     
     - name: upload macos products
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: macos-artifacts
         path: riseclipse-distribution/fr.centralesupelec.edf.riseclipse.rcp.product/target/products/*macosx*
@@ -136,7 +139,7 @@ jobs:
         overwrite: true
     
     - name: upload other products
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: other-artifacts
         path: |
@@ -153,7 +156,7 @@ jobs:
 
     steps:
     - name: download products
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: macos-artifacts
     
@@ -167,19 +170,19 @@ jobs:
         rm fr.centralesupelec.edf.riseclipse.iec61850.rcp.product-macosx.cocoa.aarch64.tar.gz
 
     - name: Build macOS x86_64 dmg
-      uses: L-Super/create-dmg-actions@v1.0.3
+      uses: L-Super/create-dmg-actions@v1.1.0
       with:
         dmg_name: 'RiseClipse_IEC61850_Application_x86_64'
         src_dir: 'x86_64/RiseClipse_IEC61850_Application.app'
 
     - name: Build macOS aarch64 dmg
-      uses: L-Super/create-dmg-actions@v1.0.3
+      uses: L-Super/create-dmg-actions@v1.1.0
       with:
         dmg_name: 'RiseClipse_IEC61850_Application_aarch64'
         src_dir: 'aarch64/RiseClipse_IEC61850_Application.app'
     
     - name: upload dmg
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: macos-dmg
         path: ./*.dmg
@@ -195,12 +198,12 @@ jobs:
     steps:
 
     - name: download macos products
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: macos-dmg
     
     - name: download other products
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: other-artifacts
     
@@ -227,13 +230,6 @@ jobs:
         echo '</body>'                                       >> /tmp/message.html
         echo '</html>'                                       >> /tmp/message.html
       id: artifacts_metadata
-
-    - name: Get version from pom.xml
-      run: |
-        cd ${{ github.event.repository.name }}
-        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-        echo "project_version=$VERSION" >> $GITHUB_OUTPUT
-      id: get_version
 
     - name: Copy artifacts
       uses: ncipollo/release-action@v1
