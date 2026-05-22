@@ -60,6 +60,7 @@ jobs:
     # available on https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/io/github/riseclipse/
     # It's OK when building update-site, but not for rcp ??
     # So we install plugins on the runner
+    # The latest tag of each component should is used for building
     
     - name: Checkout riseclipse-main
       uses: actions/checkout@v4
@@ -70,6 +71,8 @@ jobs:
     - name: Install main plugin
       run: |
         cd riseclipse-main
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
         mvn --batch-mode install
 
     - name: Checkout riseclipse-editor
@@ -81,6 +84,8 @@ jobs:
     - name: Install editor plugin
       run: |
         cd riseclipse-editor
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
         mvn --batch-mode install
 
     - name: Checkout riseclipse-metamodel-scl2003
@@ -92,6 +97,8 @@ jobs:
     - name: Install metamodel-scl2003 plugin
       run: |
         cd riseclipse-metamodel-scl2003
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
         mvn --batch-mode install
 
     - name: Checkout riseclipse-metamodel-nsd2016
@@ -103,6 +110,8 @@ jobs:
     - name: Install metamodel-nsd2016 plugin
       run: |
         cd riseclipse-metamodel-nsd2016
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
         mvn --batch-mode install
 
     - name: Build rcp
