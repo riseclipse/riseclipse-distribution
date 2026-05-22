@@ -33,20 +33,26 @@ jobs:
 
     steps:
     - name: Checkout ${{ github.event.repository.name }}
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         path: ${{ github.event.repository.name }}
         fetch-depth: 0
 
+    - name: Use released version
+      run: |
+        cd ${{ github.event.repository.name }}
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
+
     - name: Setup Java
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
         java-version: '21'
         cache: 'maven'
 
     - name: Checkout riseclipse-developer
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: riseclipse/riseclipse-developer
         path: riseclipse-developer
@@ -54,6 +60,8 @@ jobs:
     - name: Install root pom
       run: |
         cd riseclipse-developer
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
         mvn --batch-mode install
 
     # RiseClipse plugins are not found when building rcp products even if they are
@@ -210,7 +218,7 @@ jobs:
         echo '<ul>'                                          >> /tmp/message.html
         for ARTIFACT in ${ARTIFACT_LIST}
         do
-          echo '<li><a href="https://rise-clipse.pam-retd.fr/front_v2/release/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
+          echo '<li><a href="https://github.com/riseclipse/riseclipse-distribution/releases/tag/v${{ steps.get_version.outputs.project_version }}/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
         done
         echo '</ul>'                                         >> /tmp/message.html
         echo '<p></p>'                                       >> /tmp/message.html
@@ -220,19 +228,23 @@ jobs:
         echo '</html>'                                       >> /tmp/message.html
       id: artifacts_metadata
 
+    - name: Get version from pom.xml
+      run: |
+        cd ${{ github.event.repository.name }}
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo "project_version=$VERSION" >> $GITHUB_OUTPUT
+      id: get_version
+
     - name: Copy artifacts
-      uses: appleboy/scp-action@master
+      uses: ncipollo/release-action@v1
       with:
-        host: ${{ secrets.RISECLIPSE_WEB_HOSTNAME }}
-        username: ${{ secrets.RISECLIPSE_WEB_USERNAME }}
-        key: ${{ secrets.RISECLIPSE_WEB_SSHKEY }}
-        passphrase: ${{ secrets.RISECLIPSE_WEB_PASSPHRASE }}
-        source: "${{ steps.artifacts_metadata.outputs.artifact_list }}"
-        target: release
-        overwrite: true
+        allowUpdates: true
+        artifacts: ${{ steps.artifacts_metadata.outputs.artifact_list }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: v${{ steps.get_version.outputs.project_version }}
 
     - name: Send email about this new version
-      uses: dawidd6/action-send-mail@v4
+      uses: dawidd6/action-send-mail@v17
       with:
         server_address: smtp.gmail.com
         # Server port, default 25:
@@ -246,7 +258,8 @@ jobs:
         # Required mail subject:
         subject: New version of "RiseClipse IEC61850 Applications"
         # Required recipients' addresses:
-        to: dominique.marcadet@centralesupelec.fr, aurelie.dehouck-neveu@edf.fr
+#        to: dominique.marcadet@centralesupelec.fr, aurelie.dehouck-neveu@edf.fr
+        to: dominique.marcadet@centralesupelec.fr
         # Required sender full name (address can be skipped):
         from: riseclipse@gmail.com
         # Optional HTML body read from file:
