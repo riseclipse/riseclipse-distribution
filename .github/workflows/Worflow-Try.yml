@@ -1,0 +1,125 @@
+# *************************************************************************
+# **  Copyright (c) 2025 CentraleSupélec & EDF.
+# **  All rights reserved. This program and the accompanying materials
+# **  are made available under the terms of the Eclipse Public License v2.0
+# **  which accompanies this distribution, and is available at
+# **  https://www.eclipse.org/legal/epl-v20.html
+# ** 
+# **  This file is part of the RiseClipse tool
+# **  
+# **  Contributors:
+# **      Computer Science Department, CentraleSupélec
+# **      EDF R&D
+# **  Contacts:
+# **      dominique.marcadet@centralesupelec.fr
+# **      aurelie.dehouck-neveu@edf.fr
+# **  Web site:
+# **      https://riseclipse.github.io
+# *************************************************************************
+
+name: Build and deploy rcp products
+
+# This CI workflow builds release versions of RiseClipse RCP Applications.
+# Versions are uploaded to RiseClipseWeb
+# It send email about these new versions
+
+on: workflow_dispatch
+
+jobs:
+  build-products:
+    # Use a specific version to avoid unattended changes with latest
+    runs-on: ubuntu-24.04
+    name: Build rcp products
+
+    steps:
+    - name: Checkout ${{ github.event.repository.name }}
+      uses: actions/checkout@v4
+      with:
+        path: ${{ github.event.repository.name }}
+        fetch-depth: 0
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+        cache: 'maven'
+
+    - name: Checkout riseclipse-developer
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-developer
+        path: riseclipse-developer
+
+    - name: Install root pom
+      run: |
+        cd riseclipse-developer
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
+        mvn --batch-mode install
+
+    # RiseClipse plugins are not found when building rcp products even if they are
+    # available on https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/io/github/riseclipse/
+    # It's OK when building update-site, but not for rcp ??
+    # So we install plugins on the runner
+    
+    - name: Checkout riseclipse-main
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-main
+        path: riseclipse-main
+
+    - name: Install main plugin
+      run: |
+        cd riseclipse-main
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo $VERSION
+        mvn --batch-mode install
+
+    - name: Checkout riseclipse-editor
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-editor
+        path: riseclipse-editor
+
+    - name: Install editor plugin
+      run: |
+        cd riseclipse-editor
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo $VERSION
+        mvn --batch-mode install
+
+    - name: Checkout riseclipse-metamodel-scl2003
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-metamodel-scl2003
+        path: riseclipse-metamodel-scl2003
+
+    - name: Install metamodel-scl2003 plugin
+      run: |
+        cd riseclipse-metamodel-scl2003
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo $VERSION
+        mvn --batch-mode install
+
+    - name: Checkout riseclipse-metamodel-nsd2016
+      uses: actions/checkout@v4
+      with:
+        repository: riseclipse/riseclipse-metamodel-nsd2016
+        path: riseclipse-metamodel-nsd2016
+
+    - name: Install metamodel-nsd2016 plugin
+      run: |
+        cd riseclipse-metamodel-nsd2016
+        git fetch --tags
+        git switch --detach `git describe --tags $(git rev-list --tags --max-count=1)`
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo $VERSION
+        mvn --batch-mode install
+
