@@ -2,8 +2,7 @@ target "RiseClipse RCP"
 
 include "../../riseclipse-developer/fr.centralesupelec.edf.riseclipse.developer.eclipse/fr.centralesupelec.edf.riseclipse.developer.eclipse.tpd"
 
-location "http://download.eclipse.org/releases/2025-12" eclipse-2025-12 {
-	org.apache.commons.logging lazy
+location "http://download.eclipse.org/releases/2026-03" eclipse-2026-03 {
 	org.eclipse.e4.core.tools.feature.feature.group lazy
 	org.eclipse.egit.feature.group lazy
 	org.eclipse.emf.feature.group lazy
