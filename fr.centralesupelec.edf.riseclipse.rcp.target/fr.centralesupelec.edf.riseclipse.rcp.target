@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="RiseClipse RCP" sequenceNumber="1781277455">
+<target name="RiseClipse RCP" sequenceNumber="1781605914">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.ocl.common" version="1.25.0.v20260612-1453"/>
@@ -83,7 +83,7 @@
       <unit id="org.eclipse.xtext" version="2.43.0.v20260525-1205"/>
       <unit id="org.eclipse.xtext.xbase.lib" version="2.43.0.v20260525-1205"/>
       <unit id="org.eclipse.xtext.util" version="2.43.0.v20260525-1205"/>
-      <repository id="eclipse-2026-06" location="http://download.eclipse.org/releases/2026-06"/>
+      <repository id="eclipse-2026-06" location="https://download.eclipse.org/releases/2026-06"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="0.0.0"/>
