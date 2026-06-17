@@ -62,6 +62,7 @@ jobs:
         print(version.text.strip())
         PY
         )
+        test -n "$VERSION" || { echo "Unable to extract project version from pom.xml" >&2; exit 1; }
         echo "project_version=$VERSION" >> $GITHUB_OUTPUT
       id: get_version
 
