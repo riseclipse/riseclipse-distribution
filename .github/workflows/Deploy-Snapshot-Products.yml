@@ -52,7 +52,7 @@ jobs:
     - name: Get project version from pom.xml
       run: |
         cd ${{ github.event.repository.name }}/fr.centralesupelec.edf.riseclipse.rcp.product
-        VERSION=$(grep -m1 '<version>' pom.xml | sed -E 's/.*<version>([^<]+)<\/version>.*/\1/')
+        VERSION=$(awk '/<artifactId>fr.centralesupelec.edf.riseclipse.rcp.product<\/artifactId>/ { in_project = 1 } in_project && /<version>/ { sub(/.*<version>/, ""); sub(/<\/version>.*/, ""); print; exit }' pom.xml)
         echo "project_version=$VERSION" >> $GITHUB_OUTPUT
       id: get_version
 
@@ -217,7 +217,7 @@ jobs:
         echo '<ul>'                                          >> /tmp/message.html
         for ARTIFACT in ${ARTIFACT_LIST}
         do
-          echo '<li><a href="https://github.com/riseclipse/riseclipse-distribution/releases/tag/v${{ needs.build-products.outputs.project_version }}/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
+          echo '<li><a href="https://github.com/riseclipse/riseclipse-distribution/releases/download/v${{ needs.build-products.outputs.project_version }}/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
         done
         echo '</ul>'                                         >> /tmp/message.html
         echo '<p></p>'                                       >> /tmp/message.html
