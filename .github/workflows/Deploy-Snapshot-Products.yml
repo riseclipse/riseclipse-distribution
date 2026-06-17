@@ -218,9 +218,11 @@ jobs:
         ARTIFACT_LIST="$(ls -m *.tar.gz *.zip *.dmg | tr -d '\n')"
         echo "artifact_list=${ARTIFACT_LIST}" >> $GITHUB_OUTPUT
         ARTIFACT_LIST="$(ls -1 *.tar.gz *.zip *.dmg)"
-        echo '<html>'                                         > /tmp/message.html
+        echo '<!DOCTYPE html>'                                > /tmp/message.html
+        echo '<html lang="en">'                              >> /tmp/message.html
         echo '<head>'                                        >> /tmp/message.html
         echo '<meta charset="utf-8">'                        >> /tmp/message.html
+        echo '<title>New development version of "RiseClipse IEC61850 Applications"</title>' >> /tmp/message.html
         echo '</head>'                                       >> /tmp/message.html
         echo '<body>'                                        >> /tmp/message.html
         echo '<p>The following downloads are available:</p>' >> /tmp/message.html
@@ -244,7 +246,7 @@ jobs:
         artifacts: ${{ steps.artifacts_metadata.outputs.artifact_list }}
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: v${{ needs.build-products.outputs.project_version }}
-        name: "RiseClipse IEC61850 Applications v${{ steps.get_version.outputs.project_version }}"
+        name: "RiseClipse IEC61850 Applications v${{ needs.build-products.outputs.project_version }}"
 
     - name: Send email about this new development version
       uses: dawidd6/action-send-mail@v17
@@ -259,7 +261,7 @@ jobs:
         # Optional (recommended) mail server password:
         password: ${{ secrets.RISECLIPSE_GMAIL_PASSWORD }}
         # Required mail subject:
-        subject: New development version of "RiseClipse IEC61850 Applications"
+        subject: New development version of "RiseClipse IEC61850 Applications v${{ needs.build-products.outputs.project_version }}"
         # Required recipients' addresses:
 #        to: dominique.marcadet@centralesupelec.fr, aurelie.dehouck-neveu@edf.fr
         to: dominique.marcadet@centralesupelec.fr
