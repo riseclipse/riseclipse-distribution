@@ -52,7 +52,16 @@ jobs:
     - name: Get project version from pom.xml
       run: |
         cd ${{ github.event.repository.name }}/fr.centralesupelec.edf.riseclipse.rcp.product
-        VERSION=$(awk '/<artifactId>fr.centralesupelec.edf.riseclipse.rcp.product<\/artifactId>/ { in_project = 1 } in_project && /<version>/ { sub(/.*<version>/, ""); sub(/<\/version>.*/, ""); print; exit }' pom.xml)
+        VERSION=$(python - <<'PY'
+        import xml.etree.ElementTree as ET
+        root = ET.parse("pom.xml").getroot()
+        ns = {"m": "http://maven.apache.org/POM/4.0.0"}
+        version = root.find("m:version", ns)
+        if version is None or version.text is None:
+            raise SystemExit("Unable to find project version in pom.xml")
+        print(version.text.strip())
+        PY
+        )
         echo "project_version=$VERSION" >> $GITHUB_OUTPUT
       id: get_version
 
