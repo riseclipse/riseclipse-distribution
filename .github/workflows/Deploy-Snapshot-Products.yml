@@ -31,6 +31,8 @@ jobs:
     # Use a specific version to avoid unattended changes with latest
     runs-on: ubuntu-24.04
     name: Build rcp products
+    outputs:
+      project_version: ${{ steps.get_version.outputs.project_version }}
 
     steps:
     - name: Checkout ${{ github.event.repository.name }}
@@ -47,10 +49,20 @@ jobs:
         java-version: '21'
         cache: 'maven'
 
-    - name: Use released version and get version from pom.xml
+    - name: get develop version from pom.xml in product
       run: |
         cd ${{ github.event.repository.name }}/fr.centralesupelec.edf.riseclipse.rcp.product
-        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        VERSION=$(python - <<'PY'
+        import xml.etree.ElementTree as ET
+        root = ET.parse("pom.xml").getroot()
+        ns = {"m": "http://maven.apache.org/POM/4.0.0"}
+        version = root.find("m:version", ns)
+        if version is None or version.text is None:
+            raise SystemExit("Unable to find project version in pom.xml")
+        print(version.text.strip())
+        PY
+        )
+        test -n "$VERSION" || { echo "Unable to extract project version from pom.xml" >&2; exit 1; }
         echo "project_version=$VERSION" >> $GITHUB_OUTPUT
       id: get_version
 
@@ -215,7 +227,7 @@ jobs:
         echo '<ul>'                                          >> /tmp/message.html
         for ARTIFACT in ${ARTIFACT_LIST}
         do
-          echo '<li><a href="https://github.com/riseclipse/riseclipse-distribution/releases/tag/v${{ needs.build-products.get_version.outputs.project_version }}/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
+          echo '<li><a href="https://github.com/riseclipse/riseclipse-distribution/releases/download/v${{ needs.build-products.outputs.project_version }}/'"${ARTIFACT}"'">'"${ARTIFACT}"'</a></li>' >> /tmp/message.html
         done
         echo '</ul>'                                         >> /tmp/message.html
         echo '<p></p>'                                       >> /tmp/message.html
@@ -231,7 +243,7 @@ jobs:
         allowUpdates: true
         artifacts: ${{ steps.artifacts_metadata.outputs.artifact_list }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: v${{ needs.build-products.get_version.outputs.project_version }}
+        tag: v${{ needs.build-products.outputs.project_version }}
         name: "RiseClipse IEC61850 Applications v${{ steps.get_version.outputs.project_version }}"
 
     - name: Send email about this new development version
