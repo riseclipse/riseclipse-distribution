@@ -20,7 +20,7 @@
 name: Build and deploy rcp products
 
 # This CI workflow builds release versions of RiseClipse RCP Applications.
-# Versions are uploaded to RiseClipseWeb
+# Versions are uploaded to GitHub
 # It send email about these new versions
 
 on: workflow_dispatch
