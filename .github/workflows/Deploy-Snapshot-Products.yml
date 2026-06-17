@@ -50,7 +50,7 @@ jobs:
     - name: Use released version and get version from pom.xml
       run: |
         cd ${{ github.event.repository.name }}/fr.centralesupelec.edf.riseclipse.rcp.product
-        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        VERSION=$(grep -m1 '<version>' pom.xml | sed -E 's/.*<version>([^<]+)<\/version>.*/\1/')
         echo "project_version=$VERSION" >> $GITHUB_OUTPUT
       id: get_version
 
